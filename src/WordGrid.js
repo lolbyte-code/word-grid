@@ -1,7 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import './WordGrid.css';
+import { useParams } from 'react-router-dom';
 
-const WordGrid = ({ board }) => {
+const WordGrid = ({firstBoard}) => {
+  const { boardHash } = useParams();
+
+  const [board, setBoard] = useState({...firstBoard})
+
+  useEffect(() => {
+    setBoard(JSON.parse(atob(boardHash)))
+  }, [boardHash])
+
   const tWords = new Map(Object.entries(board.groups).map(f => [f[0], board.words.filter(w => w[0].group == f[0])[0].map(f => f.text)]))
   const words = board.words.flatMap(f => f.map(e => e.text))
   const [yellowTargetWords, setYellowTargetWords] = useState(tWords.get('yellow').map(w => w.toLowerCase()));
@@ -51,6 +60,7 @@ const WordGrid = ({ board }) => {
       })
       setYellowTargetWords([])
       setGrid(updatedGrid);
+      alert(board.groups.yellow)
     }
 
     if (greenTargetWords.length > 0 && greenTargetWords.every((target) => selectedWords.includes(target))) {
@@ -63,6 +73,7 @@ const WordGrid = ({ board }) => {
       })
       setGreenTargetWords([])
       setGrid(updatedGrid);
+      alert(board.groups.green)
     }
 
     if (blueTargetWords.length > 0 && blueTargetWords.every((target) => selectedWords.includes(target))) {
@@ -75,6 +86,7 @@ const WordGrid = ({ board }) => {
       })
       setBlueTargetWords([])
       setGrid(updatedGrid);
+      alert(board.groups.blue)
     }
 
     if (purpleTargetWords.length > 0 && purpleTargetWords.every((target) => selectedWords.includes(target))) {
@@ -87,6 +99,7 @@ const WordGrid = ({ board }) => {
       })
       setPurpleTargetWords([])
       setGrid(updatedGrid);
+      alert(board.groups.purple)
     }
   }, [grid]);
 

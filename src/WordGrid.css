@@ -7,6 +7,8 @@
 }
 
 .word-cell {
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
   flex: 1;
   padding: 10px;
   text-align: center;
@@ -19,21 +21,26 @@
 }
 
 .word-cell.selected {
-  background-color: #888;
+  color: white;
+  background-color: rgb(90, 89, 78);
 }
 
 .word-cell.yellow-locked {
-  background-color: yellow;
+  color: black;
+  background-color: rgb(249, 223, 109);
 }
 
 .word-cell.green-locked {
-  background-color: green;
+  color: black;
+  background-color: rgb(160, 195, 90);
 }
 
 .word-cell.blue-locked {
-  background-color: blue;
+  color: black;
+  background-color: rgb(176, 196, 239);
 }
 
 .word-cell.purple-locked {
-  background-color: purple;
+  color: black;
+  background-color: rgb(186, 129, 197);
 }

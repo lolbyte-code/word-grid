@@ -1,41 +1,24 @@
-/* .words-input-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 20px;
-  }
-  
-  .word-group {
-    margin-bottom: 20px;
-  }
-  
-  .group-title,
-  .word-input {
-    margin: 5px;
-    padding: 10px;
-    font-size: 16px;
-    width: 100%;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-  }
-  
-  .group-title {
-    background-color: #4caf50;
-    color: white;
-  }
-  
-  .submit-button {
-    margin-top: 20px;
-    padding: 12px;
-    background-color: #4caf50;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  .submit-button:hover {
-    background-color: #45a049;
-  }
-   */
+.words-input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.word-group {
+  margin-bottom: 20px;
+}
+
+.word-input {
+  width: 200px;
+  padding: 8px;
+  margin-right: 8px;
+}
+
+.submit-button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
