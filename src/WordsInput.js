@@ -17,7 +17,7 @@ const WordsInput = ({ board }) => {
   };
 
   const generateLinkHandler = () => {
-    navigator.clipboard.writeText(`${window.location.origin}/word-grid/#/play/${btoa(JSON.stringify(tempBoard))}`)
+    navigator.clipboard.writeText(`${window.location.origin}/word-grid/#/play/${serializeBoard()}`)
   }
 
   const isBoardValid = () => {
@@ -27,6 +27,10 @@ const WordsInput = ({ board }) => {
   }
 
   const groupColors = ['yellow', 'green', 'blue', 'purple'];
+
+  const serializeBoard = () => {
+    return btoa(`${Object.values(board.groups).join("|")}|${board.words.flatMap(b => b.map(c => c.text)).join("|")}`)
+  }
 
   return (
     <div className="words-input-container">

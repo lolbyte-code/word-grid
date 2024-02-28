@@ -8,7 +8,34 @@ const WordGrid = ({firstBoard}) => {
   const [board, setBoard] = useState({...firstBoard})
 
   useEffect(() => {
-    setBoard(JSON.parse(atob(boardHash)))
+    const list = atob(boardHash).split("|")
+    const tempBoard = {...board}
+    tempBoard.groups.yellow = list[0]
+    tempBoard.groups.green = list[1]
+    tempBoard.groups.blue = list[2]
+    tempBoard.groups.purple = list[3]
+
+    tempBoard.words[0][0].text = list[4]
+    tempBoard.words[0][1].text = list[5]
+    tempBoard.words[0][2].text = list[6]
+    tempBoard.words[0][3].text = list[7]
+
+    tempBoard.words[1][0].text = list[8]
+    tempBoard.words[1][1].text = list[9]
+    tempBoard.words[1][2].text = list[10]
+    tempBoard.words[1][3].text = list[11]
+
+    tempBoard.words[2][0].text = list[12]
+    tempBoard.words[2][1].text = list[13]
+    tempBoard.words[2][2].text = list[14]
+    tempBoard.words[2][3].text = list[15]
+
+    tempBoard.words[3][0].text = list[16]
+    tempBoard.words[3][1].text = list[17]
+    tempBoard.words[3][2].text = list[18]
+    tempBoard.words[3][3].text = list[19]
+
+    setBoard(tempBoard)
   }, [boardHash])
 
   const tWords = new Map(Object.entries(board.groups).map(f => [f[0], board.words.filter(w => w[0].group == f[0])[0].map(f => f.text)]))
