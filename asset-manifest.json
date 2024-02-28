@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/word-grid/static/css/main.416943a1.css",
-    "main.js": "/word-grid/static/js/main.12091408.js",
+    "main.js": "/word-grid/static/js/main.049b37b6.js",
     "index.html": "/word-grid/index.html",
     "main.416943a1.css.map": "/word-grid/static/css/main.416943a1.css.map",
-    "main.12091408.js.map": "/word-grid/static/js/main.12091408.js.map"
+    "main.049b37b6.js.map": "/word-grid/static/js/main.049b37b6.js.map"
   },
   "entrypoints": [
     "static/css/main.416943a1.css",
-    "static/js/main.12091408.js"
+    "static/js/main.049b37b6.js"
   ]
 }
