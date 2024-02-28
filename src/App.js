@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import WordGrid from './WordGrid';
 import WordsInput from './WordsInput';
-import { Routes, Route, useParams } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 
 
 function App() {
