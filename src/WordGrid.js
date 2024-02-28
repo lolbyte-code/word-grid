@@ -25,7 +25,7 @@ const WordGrid = () => {
       Object.entries(newBoard.groups).map((group) => [
         group[0],
         newBoard.words
-          .filter((word) => word[0].group == group[0])[0]
+          .filter((word) => word[0].group === group[0])[0]
           .map((word) => word.text),
       ]),
     );
@@ -71,7 +71,7 @@ const WordGrid = () => {
 
   const handleSubmit = () => {
     const selectedCount = grid.flat().filter((cell) => cell.selected).length;
-    if (selectedCount != 4) {
+    if (selectedCount !== 4) {
       return;
     }
     let colorSolved = false;
@@ -99,7 +99,7 @@ const WordGrid = () => {
       const colorWords = targetWords.get(color);
       const oneAway =
         colorWords.length > 0 &&
-        colorWords.filter((target) => !selectedWords.includes(target)).length ==
+        colorWords.filter((target) => !selectedWords.includes(target)).length ===
           1;
       if (oneAway) {
         setTimeout(() => {
@@ -137,7 +137,7 @@ const WordGrid = () => {
     // Check if game is over / update attempts
     if (!colorSolved) {
       setAttemptsRemaining(attemptsRemaining - 1);
-      if (attemptsRemaining == 1) {
+      if (attemptsRemaining === 1) {
         setBannerText("better luck next time...");
       }
     } else {
