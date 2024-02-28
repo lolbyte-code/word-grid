@@ -23,7 +23,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build"
   },
-  "homepage": "https://lolbyte-code.github.io/word-grid",
+  "homepage": "https://tonys-toy-box.com",
   "eslintConfig": {
     "extends": [
       "react-app",

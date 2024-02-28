@@ -25,7 +25,7 @@ const WordsInput = () => {
 
   const generateLinkHandler = () => {
     navigator.clipboard.writeText(
-      `${window.location.origin}/word-grid/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}`,
+      `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}`,
     );
   };
 
