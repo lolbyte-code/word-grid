@@ -60,7 +60,6 @@ const WordGrid = ({firstBoard}) => {
       })
       setYellowTargetWords([])
       setGrid(updatedGrid);
-      alert(board.groups.yellow)
     }
 
     if (greenTargetWords.length > 0 && greenTargetWords.every((target) => selectedWords.includes(target))) {
@@ -73,7 +72,6 @@ const WordGrid = ({firstBoard}) => {
       })
       setGreenTargetWords([])
       setGrid(updatedGrid);
-      alert(board.groups.green)
     }
 
     if (blueTargetWords.length > 0 && blueTargetWords.every((target) => selectedWords.includes(target))) {
@@ -86,7 +84,6 @@ const WordGrid = ({firstBoard}) => {
       })
       setBlueTargetWords([])
       setGrid(updatedGrid);
-      alert(board.groups.blue)
     }
 
     if (purpleTargetWords.length > 0 && purpleTargetWords.every((target) => selectedWords.includes(target))) {
@@ -99,7 +96,6 @@ const WordGrid = ({firstBoard}) => {
       })
       setPurpleTargetWords([])
       setGrid(updatedGrid);
-      alert(board.groups.purple)
     }
   }, [grid]);
 
@@ -138,6 +134,10 @@ const WordGrid = ({firstBoard}) => {
           ))}
         </div>
       ))}
+      {yellowTargetWords.length === 0 ? <div class='word-cell yellow-locked'>{board.groups.yellow}</div> : null}
+      {greenTargetWords.length === 0 ? <div class='word-cell green-locked'>{board.groups.green}</div> : null}
+      {blueTargetWords.length === 0 ? <div class='word-cell blue-locked'>{board.groups.blue}</div> : null}
+      {purpleTargetWords.length === 0 ? <div class='word-cell purple-locked'>{board.groups.purple}</div> : null}
     </div>
   );
 };
