@@ -40,7 +40,7 @@ body {
   box-sizing: border-box;
 }
 
-button {
+.clear-button, .link-button {
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
   border: none;

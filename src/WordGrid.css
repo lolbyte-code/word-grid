@@ -78,7 +78,7 @@ body {
   width: 78vw;
 }
 
-.button-container {
+.action-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -87,15 +87,14 @@ body {
   margin-top: 10px;
 }
 
-button {
+.submit-button {
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
   color: black;
-}
-
-.submit-button {
+  width: 15vh;
+  margin: auto;
   background-color: rgb(204, 206, 210);
 }

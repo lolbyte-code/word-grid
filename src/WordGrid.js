@@ -190,7 +190,7 @@ const WordGrid = () => {
           ))}
         </div>
       ))}
-      <div className="button-container">
+      <div className="action-container">
         <AttemptsRemaining attempts={attemptsRemaining} />
         <button className="submit-button" onClick={() => handleSubmit()}>
           Submit
