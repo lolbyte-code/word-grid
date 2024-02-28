@@ -17,7 +17,7 @@ const WordsInput = ({ board }) => {
   };
 
   const generateLinkHandler = () => {
-    navigator.clipboard.writeText(`http://localhost:3000/play/${btoa(JSON.stringify(tempBoard))}`)
+    navigator.clipboard.writeText(`${window.location.origin}/word-grid/#/play/${btoa(JSON.stringify(tempBoard))}`)
   }
 
   const isBoardValid = () => {
