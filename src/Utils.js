@@ -12,3 +12,10 @@ export const useStickyState = (defaultValue, key) => {
 
   return [value, setValue];
 };
+
+export const hasDuplicates = (array) => {
+  return new Set(array).size !== array.length;
+};
+
+export const setEquals = (xs, ys) =>
+  xs.size === ys.size && [...xs].every((x) => ys.has(x));

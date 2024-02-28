@@ -1,11 +1,13 @@
 import React from "react";
 import "./WordsInput.css";
-import { useStickyState } from "./Utils";
+import { useStickyState, hasDuplicates } from "./Utils";
+import { serializeBoard, initialBoard, currentVersion } from "./Board";
 
-const WordsInput = ({ initialBoard }) => {
-  const [newBoard, setNewBoard] = useStickyState({ ...initialBoard }, "board");
+const WordsInput = () => {
+  const board = initialBoard();
+  const [newBoard, setNewBoard] = useStickyState({ ...board }, "board");
 
-  const handleTitleChange = (color, event) => {
+  const handleGroupChange = (color, event) => {
     const updatedBoard = { ...newBoard };
     updatedBoard.groups[color] = event.target.value;
     setNewBoard(updatedBoard);
@@ -18,12 +20,12 @@ const WordsInput = ({ initialBoard }) => {
   };
 
   const clearBoardHandler = () => {
-    setNewBoard({ ...initialBoard });
+    setNewBoard({ ...board });
   };
 
   const generateLinkHandler = () => {
     navigator.clipboard.writeText(
-      `${window.location.origin}/word-grid/#/play/${serializeBoard()}`,
+      `${window.location.origin}/word-grid/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}`,
     );
   };
 
@@ -33,23 +35,15 @@ const WordsInput = ({ initialBoard }) => {
       newBoard.groups.blue &&
       newBoard.groups.purple &&
       newBoard.groups.green;
-    const wordsComplete = newBoard.words.every((row) =>
-      row.every((word) => word.text !== ""),
+    const allWords = newBoard.words.flatMap((row) =>
+      row.map((word) => word.text),
     );
-    return keysComplete && wordsComplete;
+    const wordsComplete = allWords.every((word) => word !== "");
+    const noDuplicateWords = !hasDuplicates(allWords);
+    return keysComplete && wordsComplete && noDuplicateWords;
   };
 
-  const groupColors = ["yellow", "green", "blue", "purple"];
-
-  const serializeBoard = () => {
-    return btoa(
-      encodeURIComponent(
-        `${Object.values(newBoard.groups).join("|")}|${newBoard.words
-          .flatMap((b) => b.map((c) => c.text))
-          .join("|")}`,
-      ),
-    );
-  };
+  const groupColors = Object.entries(newBoard.groups).map((group) => group[0]);
 
   return (
     <div className="words-input-container">
@@ -60,7 +54,7 @@ const WordsInput = ({ initialBoard }) => {
               type="text"
               placeholder={`${color.charAt(0).toUpperCase() + color.slice(1)} Group Title`}
               value={newBoard.groups[color]}
-              onChange={(event) => handleTitleChange(color, event)}
+              onChange={(event) => handleGroupChange(color, event)}
               className="word-input"
             />
           </label>
