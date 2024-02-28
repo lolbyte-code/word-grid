@@ -2,23 +2,58 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 300px;
+  margin: 0 auto;
 }
 
 .word-group {
   margin-bottom: 20px;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.yellow-word-group {
+  border: 2px solid rgb(249, 223, 109);
+}
+
+.green-word-group {
+  border: 2px solid rgb(160, 195, 90);
+}
+
+.blue-word-group {
+  border: 2px solid rgb(176, 196, 239);
+}
+
+.purple-word-group {
+  border: 2px solid rgb(186, 129, 197);
 }
 
 .word-input {
-  width: 200px;
+  font-family: "Poppins", sans-serif;
+  width: 100%;
   padding: 8px;
-  margin-right: 8px;
+  margin-bottom: 8px;
+  box-sizing: border-box;
 }
 
-.submit-button {
-  background-color: #4caf50;
-  color: #fff;
+button {
+  font-family: "Poppins", sans-serif;
   padding: 10px 20px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  color: black;
+}
+
+.clear-button {
+  background-color: rgb(204, 206, 210);
+}
+
+.button-container {
+  display: flex;
+  gap: 10px;
+}
+
+.link-button {
+  background-color: rgb(160, 195, 90);
 }

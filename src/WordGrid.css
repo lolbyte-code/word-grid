@@ -1,23 +1,50 @@
-.word-grid {
+body {
+  margin: 0;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  height: 100vh;
+}
+
+.word-grid-container {
   display: block;
+}
+
+.word-grid {
+  overflow-x: auto;
+  white-space: nowrap;
 }
 
 .word-row {
   display: flex;
+  flex-wrap: wrap;
+  overflow-x: auto;
 }
 
 .word-cell {
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  flex: 1;
-  padding: 10px;
+  padding: 2vw;
   text-align: center;
-  margin: 5px;
+  margin: 1vw;
   background-color: #f0f0f0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  border-radius: 8px;
+  border-radius: 2vw;
   text-transform: uppercase;
   user-select: none;
+  width: 15vw;
+  height: 15vw;
+  overflow: hidden;
+  font-size: 2.5vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.word-cell span {
+  max-height: 100%;
+  overflow: hidden;
+  overflow-wrap: break-word;
 }
 
 .word-cell.selected {
@@ -43,4 +70,8 @@
 .word-cell.purple-locked {
   color: black;
   background-color: rgb(186, 129, 197);
+}
+
+.answer {
+  width: 78vw;
 }
