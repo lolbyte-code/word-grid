@@ -26,7 +26,7 @@ const WordGrid = () => {
         group[0],
         newBoard.words
           .filter((word) => word[0].group === group[0])[0]
-          .map((word) => word.text),
+          .map((word) => word.text.toLowerCase()),
       ]),
     );
     setTargetWords(targetWords);
@@ -108,6 +108,7 @@ const WordGrid = () => {
         setBannerText("one away...");
       }
     });
+
 
     // Check for solves
     colors.forEach((color) => {
