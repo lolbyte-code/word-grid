@@ -29,7 +29,7 @@ const WordsInput = ({ board }) => {
   const groupColors = ['yellow', 'green', 'blue', 'purple'];
 
   const serializeBoard = () => {
-    return btoa(`${Object.values(board.groups).join("|")}|${board.words.flatMap(b => b.map(c => c.text)).join("|")}`)
+    return btoa(encodeURIComponent(`${Object.values(board.groups).join("|")}|${board.words.flatMap(b => b.map(c => c.text)).join("|")}`))
   }
 
   return (

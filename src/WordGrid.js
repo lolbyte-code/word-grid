@@ -8,7 +8,7 @@ const WordGrid = ({firstBoard}) => {
   const [board, setBoard] = useState({...firstBoard})
 
   useEffect(() => {
-    const list = atob(boardHash).split("|")
+    const list = decodeURIComponent(atob(boardHash)).split("|")
     const tempBoard = {...board}
     tempBoard.groups.yellow = list[0]
     tempBoard.groups.green = list[1]
