@@ -1,0 +1,39 @@
+.word-grid {
+  display: block;
+}
+
+.word-row {
+  display: flex;
+}
+
+.word-cell {
+  flex: 1;
+  padding: 10px;
+  text-align: center;
+  margin: 5px;
+  background-color: #f0f0f0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  text-transform: uppercase;
+  user-select: none;
+}
+
+.word-cell.selected {
+  background-color: #888;
+}
+
+.word-cell.yellow-locked {
+  background-color: yellow;
+}
+
+.word-cell.green-locked {
+  background-color: green;
+}
+
+.word-cell.blue-locked {
+  background-color: blue;
+}
+
+.word-cell.purple-locked {
+  background-color: purple;
+}
