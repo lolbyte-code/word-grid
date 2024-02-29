@@ -9,9 +9,9 @@
   font-family: "Poppins", sans-serif;
   padding: 2vw;
   text-align: center;
-  margin: 1vw;
+  margin: 0.9vw;
   background-color: #f0f0f0;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  border: 2px solid #cecccc;
   border-radius: 2vw;
   text-transform: uppercase;
   user-select: none;
@@ -19,7 +19,7 @@
   height: 15vw;
   max-height: 70px;
   overflow: hidden;
-  font-size: min(2.5vw, 16px);
+  font-size: min(2.5vw, 19px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -34,26 +34,31 @@
 .word-cell.selected {
   color: white;
   background-color: rgb(90, 89, 78);
+  border: 2px solid rgb(60, 60, 53);
 }
 
 .word-cell.yellow-locked {
   color: black;
   background-color: rgb(249, 223, 109);
+  border: 2px solid rgb(230, 199, 61);
 }
 
 .word-cell.green-locked {
   color: black;
   background-color: rgb(160, 195, 90);
+  border: 2px solid rgb(114, 141, 61);
 }
 
 .word-cell.blue-locked {
   color: black;
   background-color: rgb(176, 196, 239);
+  border: 2px solid rgb(110, 149, 235);
 }
 
 .word-cell.purple-locked {
   color: black;
   background-color: rgb(186, 129, 197);
+  border: 2px solid rgb(154, 57, 173);
 }
 
 .word-cell.yellow-locked.option {
@@ -108,6 +113,9 @@
   color: black;
   margin: 10px;
   background-color: rgb(204, 206, 210);
+  border: 2px solid rgb(144, 146, 150);
+  font-size: min(2.5vw, 20px);
+  font-weight: 500;
 }
 
 .submit-button {
@@ -120,6 +128,9 @@
   color: black;
   width: 15vh;
   background-color: rgb(204, 206, 210);
+  border: 2px solid rgb(144, 146, 150);
+  font-size: min(2.5vw, 20px);
+  font-weight: 500;
 }
 
 .loss-buttons {
@@ -130,4 +141,8 @@
 .win-buttons {
   display: flex;
   flex-direction: column;
+}
+
+.copy-text {
+  font-size: min(2.5vw, 20px);
 }

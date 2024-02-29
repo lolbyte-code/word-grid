@@ -196,7 +196,7 @@ const WordGrid = () => {
         <button className="share-button" onClick={() => handleShare()}>
           Share
         </button>
-        {showShareMessage && "Copied to clipboard!"}
+        {showShareMessage && <p className="copy-text">Copied to clipboard!</p>}
         <button className="share-button" onClick={() => handleTryAgain()}>
           Try Again
         </button>
@@ -215,7 +215,7 @@ const WordGrid = () => {
         <button className="share-button" onClick={() => handleShare()}>
           Share
         </button>
-        {showShareMessage && "Copied to clipboard!"}
+        {showShareMessage && <p className="copy-text">Copied to clipboard!</p>}
       </div>,
     );
   }, [win, showShareMessage]);
@@ -302,7 +302,9 @@ const WordGrid = () => {
         >
           {hideSubmit ? "Share" : "Submit"}
         </button>
-        {hideSubmit && showShareMessage && "Copied to clipboard!"}
+        {hideSubmit && showShareMessage && (
+          <p className="copy-text">Copied to clipboard!</p>
+        )}
       </div>
     </div>
   );
