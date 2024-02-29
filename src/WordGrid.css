@@ -86,6 +86,7 @@
 }
 
 .answer {
+  max-width: 1000px;
   width: 78vw;
 }
 
