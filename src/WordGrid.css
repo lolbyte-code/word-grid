@@ -99,6 +99,8 @@
   margin-bottom: 20px;
   margin: auto;
   margin-top: 10px;
+  text-align: center;
+  font-family: "Poppins", sans-serif;
 }
 
 .share-button {
@@ -125,6 +127,11 @@
 }
 
 .loss-buttons {
+  display: flex;
+  flex-direction: column;
+}
+
+.win-buttons {
   display: flex;
   flex-direction: column;
 }

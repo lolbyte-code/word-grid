@@ -23,6 +23,7 @@ const WordGrid = () => {
   const [lost, setLost] = useState(false);
   const [win, setWin] = useState(false);
   const [hideSubmit, setHideSubmit] = useState(false);
+  const [showShareMessage, setShowShareMessage] = useState(false);
 
   useEffect(() => {
     const newBoard = deserializeBoard(boardHash, currentVersion);
@@ -188,13 +189,14 @@ const WordGrid = () => {
   };
 
   useEffect(() => {
-    if (!lost) return;
+    if (!lost || hideSubmit) return;
     setBannerText("better luck next time...");
     setBannerContent(
       <div className="loss-buttons">
         <button className="share-button" onClick={() => handleShare()}>
           Share
         </button>
+        {showShareMessage && "Copied to clipboard!"}
         <button className="share-button" onClick={() => handleTryAgain()}>
           Try Again
         </button>
@@ -203,24 +205,29 @@ const WordGrid = () => {
         </button>
       </div>,
     );
-  }, [lost]);
+  }, [lost, showShareMessage]);
 
   useEffect(() => {
     if (!win) return;
     setBannerText("good job!");
     setBannerContent(
-      <div>
+      <div className="win-buttons">
         <button className="share-button" onClick={() => handleShare()}>
           Share
         </button>
+        {showShareMessage && "Copied to clipboard!"}
       </div>,
     );
-  }, [win]);
+  }, [win, showShareMessage]);
 
   const handleShare = () => {
     navigator.clipboard.writeText(
       shareResultsCopyPasta(moves, searchParams.get("name")),
     );
+    setTimeout(() => {
+      setShowShareMessage(false);
+    }, "1000");
+    setShowShareMessage(true);
   };
 
   const handleTryAgain = () => {
@@ -304,6 +311,7 @@ const WordGrid = () => {
         >
           {hideSubmit ? "Share" : "Submit"}
         </button>
+        {(hideSubmit && showShareMessage) && "Copied to clipboard!"}
       </div>
     </div>
   );
