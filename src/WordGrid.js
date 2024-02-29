@@ -227,17 +227,20 @@ const WordGrid = () => {
     .sort((a, b) => solvedColors.indexOf(a) - solvedColors.indexOf(b))
     .map((color) => {
       if (targetWords.get(color).length !== 0) return null;
+      const words = board.words
+        .flatMap((word) =>
+          word
+            .filter((w) => w.group === color)
+            .map((w) => w.uneditedText),
+        )
+        .join(", ")
       return (
         <div key={color} className={`word-cell ${color}-locked answer`}>
           <span>{board.groups[color]}</span>
           <span className="answers">
-            {board.words
-              .flatMap((word) =>
-                word
-                  .filter((w) => w.group === color)
-                  .map((w) => w.uneditedText),
-              )
-              .join(", ")}
+            {words.substr(0, 45)}
+            {words.length > 45 && <br />}
+            {words.length > 45 && words.substr(45)}
           </span>
         </div>
       );
