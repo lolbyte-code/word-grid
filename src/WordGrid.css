@@ -14,16 +14,15 @@
   font-family: "Poppins", sans-serif;
   padding: 2vw;
   text-align: center;
-  margin: 5px;
+  margin: 1vw;
   background-color: #f0f0f0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   border-radius: 2vw;
   text-transform: uppercase;
   user-select: none;
-  width: 75px;
-  height: 75px;
-  max-width: 15vw;
-  max-height: 15vw;
+  width: 15vw;
+  height: 15vw;
+  max-height: 70px; 
   overflow: hidden;
   font-size: min(2.5vw, 16px);
   display: flex;
@@ -86,7 +85,6 @@
 }
 
 .answer {
-  max-width: 1000px;
   width: 78vw;
 }
 
