@@ -120,6 +120,11 @@ const WordsInput = () => {
           />
         </label>
       )}
+      {isBoardValid() && puzzleName && link && (
+        <a className="game-link" href={link}>
+          {link}
+        </a>
+      )}
       <div className="button-container">
         <button className="clear-button" onClick={() => clearBoardHandler()}>
           Clear Board
@@ -133,11 +138,6 @@ const WordsInput = () => {
           </button>
         )}
       </div>
-      {isBoardValid() && puzzleName && link && (
-        <a className="game-link" href={link}>
-          {link}
-        </a>
-      )}
     </div>
   );
 };
