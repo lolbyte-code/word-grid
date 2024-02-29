@@ -64,7 +64,8 @@ const WordsInput = () => {
     );
     const wordsComplete = allWords.every((word) => word !== "");
     const noDuplicateWords = !hasDuplicates(allWords);
-    return keysComplete && wordsComplete && noDuplicateWords;
+    const noDuplicateGroups = !hasDuplicates([newBoard.groups.yellow, newBoard.groups.green, newBoard.groups.blue, newBoard.groups.purple])
+    return keysComplete && wordsComplete && noDuplicateWords && noDuplicateGroups;
   };
 
   const groupColors = Object.entries(newBoard.groups).map((group) => group[0]);
