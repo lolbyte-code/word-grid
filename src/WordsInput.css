@@ -23,18 +23,22 @@
 
 .yellow-word-group {
   border: 2px solid rgb(249, 223, 109);
+  background-color: rgb(249, 223, 109);
 }
 
 .green-word-group {
   border: 2px solid rgb(160, 195, 90);
+  background-color: rgb(160, 195, 90);
 }
 
 .blue-word-group {
   border: 2px solid rgb(176, 196, 239);
+  background-color: rgb(176, 196, 239);
 }
 
 .purple-word-group {
   border: 2px solid rgb(186, 129, 197);
+  background-color: rgb(186, 129, 197);
 }
 
 .word-input {
@@ -73,7 +77,7 @@
 }
 
 .link-button {
-  background-color: rgb(160, 195, 90);
+  background-color: rgb(232, 167, 83);
 }
 
 .link-container {
