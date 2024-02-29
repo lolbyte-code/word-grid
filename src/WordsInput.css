@@ -48,7 +48,9 @@
 
 .game-link {
   font-family: "Poppins", sans-serif;
+  font-size: small;
   margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 .clear-button {
@@ -63,4 +65,8 @@
 
 .link-button {
   background-color: rgb(160, 195, 90);
+}
+
+.link-container {
+  display: flex;
 }

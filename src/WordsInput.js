@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./WordsInput.css";
 import { useStickyState, hasDuplicates } from "./Utils";
 import { serializeBoard, initialBoard, currentVersion } from "./Board";
+import CopyToClipboardLink from "./CopyToClipboardLink";
 
 const WordsInput = () => {
   const board = initialBoard();
@@ -121,12 +122,10 @@ const WordsInput = () => {
         </label>
       )}
       {isBoardValid() && puzzleName && link && (
-        <a className="game-link" href={link}>
-          {link}
-        </a>
+        <CopyToClipboardLink className="game-link" link={link} />
       )}
       <div className="button-container">
-        <button className="clear-button" onClick={() => clearBoardHandler()}>
+        <button onClick={() => clearBoardHandler()}>
           Clear Board
         </button>
         {isBoardValid() && puzzleName !== "" && (
