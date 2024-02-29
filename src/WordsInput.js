@@ -30,7 +30,6 @@ const WordsInput = () => {
       url: url,
       domain: `tiny.one`,
     };
-    let copyPasta = "asdf";
 
     fetch(`https://api.tinyurl.com/create`, {
       method: `POST`,
@@ -47,8 +46,7 @@ const WordsInput = () => {
       })
       .then((data) => {
         console.log(data);
-        copyPasta = data["data"]["tiny_url"];
-        navigator.clipboard.writeText(copyPasta);
+        navigator.clipboard.writeText(data["data"]["tiny_url"]);
       })
       .catch((error) => console.error(error));
   };
