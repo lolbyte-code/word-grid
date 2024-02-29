@@ -1,14 +1,18 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./WordsInput.css";
-import { useStickyState, hasDuplicates } from "./Utils";
+import { useStickyState, hasDuplicates, setEquals } from "./Utils";
 import { serializeBoard, initialBoard, currentVersion } from "./Board";
 import CopyToClipboardLink from "./CopyToClipboardLink";
+import Banner from "./Banner";
+import ValidationErrorList from "./ValidationErrorList";
 
 const WordsInput = () => {
   const board = initialBoard();
   const [newBoard, setNewBoard] = useStickyState({ ...board }, "board");
   const [puzzleName, setPuzzleName] = useStickyState("", "puzzleName");
   const [link, setLink] = useState("");
+  const [validations, setValidations] = useState([]);
+  const [showValidations, setShowValidations] = useState(false);
 
   const handleGroupChange = (color, event) => {
     const updatedBoard = { ...newBoard };
@@ -23,11 +27,21 @@ const WordsInput = () => {
   };
 
   const clearBoardHandler = () => {
+    setShowValidations(false);
     setLink("");
+    setPuzzleName("");
     setNewBoard({ ...board });
   };
 
-  const generateLinkHandler = (puzzleName) => {
+  useEffect(() => {
+    setLink("");
+  }, [newBoard, puzzleName]);
+
+  const generateLinkHandler = () => {
+    if (!isBoardValid()) {
+      setShowValidations(true);
+      return;
+    }
     const url = `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}?name=${encodeURIComponent(puzzleName)}`;
     let body = {
       url: url,
@@ -68,9 +82,8 @@ const WordsInput = () => {
     const allWords = newBoard.words.flatMap((row) =>
       row.map((word) => word.text),
     );
-    const wordsComplete = allWords.every(
-      (word) => word !== "" && word.length < 23,
-    );
+    const wordsComplete = allWords.every((word) => word !== "");
+    const wordsLessThanMax = allWords.every((word) => word.length < 23);
     const noDuplicateWords = !hasDuplicates(allWords);
     const noDuplicateGroups = !hasDuplicates([
       newBoard.groups.yellow,
@@ -78,8 +91,36 @@ const WordsInput = () => {
       newBoard.groups.blue,
       newBoard.groups.purple,
     ]);
+    const puzzleNameExists = puzzleName !== "";
+    const newValidations = [];
+    if (!keysComplete) {
+      newValidations.push("All groups must be named!");
+    }
+    if (!wordsComplete) {
+      newValidations.push("Words may not be blank!");
+    }
+    if (!wordsLessThanMax) {
+      newValidations.push("Words cannot exceed 23 characters!");
+    }
+    if (!noDuplicateWords) {
+      newValidations.push("Duplicate words not allowed!");
+    }
+    if (!noDuplicateGroups) {
+      newValidations.push("Duplicate group names not allowed!");
+    }
+    if (!puzzleNameExists) {
+      newValidations.push("Puzzle name required!");
+    }
+    if (!setEquals(new Set(newValidations), new Set(validations))) {
+      setValidations(newValidations);
+    }
     return (
-      keysComplete && wordsComplete && noDuplicateWords && noDuplicateGroups
+      keysComplete &&
+      wordsComplete &&
+      wordsLessThanMax &&
+      noDuplicateWords &&
+      noDuplicateGroups &&
+      puzzleNameExists
     );
   };
 
@@ -112,32 +153,27 @@ const WordsInput = () => {
           ))}
         </div>
       ))}
-      {isBoardValid() && (
-        <label>
-          <input
-            type="text"
-            placeholder="Puzzle Name"
-            value={puzzleName}
-            onChange={(event) => setPuzzleName(event.target.value)}
-            className="word-input"
-          />
-        </label>
-      )}
-      {isBoardValid() && puzzleName && link && (
+      {showValidations && <ValidationErrorList errors={validations} />}
+      <label>
+        <input
+          type="text"
+          placeholder="Puzzle Name"
+          value={puzzleName}
+          onChange={(event) => setPuzzleName(event.target.value)}
+          className="word-input"
+          disabled={!isBoardValid() && validations.length > 1}
+        />
+      </label>
+      {isBoardValid() && link && (
         <CopyToClipboardLink className="game-link" link={link} />
       )}
       <div className="button-container">
         <button className="clear-button" onClick={() => clearBoardHandler()}>
           Clear Board
         </button>
-        {isBoardValid() && puzzleName !== "" && (
-          <button
-            className="link-button"
-            onClick={() => generateLinkHandler(puzzleName)}
-          >
-            Generate Link
-          </button>
-        )}
+        <button className="link-button" onClick={() => generateLinkHandler()}>
+          Generate Link
+        </button>
       </div>
     </div>
   );

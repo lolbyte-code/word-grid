@@ -311,7 +311,7 @@ const WordGrid = () => {
         >
           {hideSubmit ? "Share" : "Submit"}
         </button>
-        {(hideSubmit && showShareMessage) && "Copied to clipboard!"}
+        {hideSubmit && showShareMessage && "Copied to clipboard!"}
       </div>
     </div>
   );

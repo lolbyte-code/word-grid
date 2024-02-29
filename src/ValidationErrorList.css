@@ -1,0 +1,23 @@
+.validation-error-list {
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  margin-bottom: 20px;
+  padding: 10px;
+  border: 1px solid #e74c3c;
+  border-radius: 5px;
+  background-color: #f8d7da;
+}
+
+.validation-error-list h3 {
+  color: #721c24;
+}
+
+.validation-error-list ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.validation-error-list li {
+  color: #721c24;
+  margin-bottom: 5px;
+}

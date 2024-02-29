@@ -22,7 +22,7 @@
   user-select: none;
   width: 15vw;
   height: 15vw;
-  max-height: 70px; 
+  max-height: 70px;
   overflow: hidden;
   font-size: min(2.5vw, 16px);
   display: flex;
