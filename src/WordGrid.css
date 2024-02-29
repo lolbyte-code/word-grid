@@ -60,8 +60,36 @@
   background-color: rgb(186, 129, 197);
 }
 
+.word-cell.yellow-locked.option {
+  position: absolute;
+  left: 9999px;
+  opacity: 0;
+}
+
+.word-cell.green-locked.option {
+  position: absolute;
+  left: 9999px;
+  opacity: 0;
+}
+
+.word-cell.blue-locked.option {
+  position: absolute;
+  left: 9999px;
+  opacity: 0;
+}
+
+.word-cell.purple-locked.option {
+  position: absolute;
+  left: 9999px;
+  opacity: 0;
+}
+
 .answer {
   width: 78vw;
+}
+
+.answers {
+  font-weight: 200;
 }
 
 .action-container {

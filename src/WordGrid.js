@@ -16,23 +16,28 @@ const WordGrid = () => {
   const [attemptsRemaining, setAttemptsRemaining] = useState(4);
   const [bannerText, setBannerText] = useState("");
   const [guesses, setGuesses] = useState([]);
+  const [solvedColors, setSolvedColors] = useState([]);
 
   useEffect(() => {
     const newBoard = deserializeBoard(boardHash, currentVersion);
     const words = newBoard.words.flatMap((word) => word.map((w) => w.text));
 
-    const targetWords = new Map(
-      Object.entries(newBoard.groups).map((group) => [
-        group[0],
-        newBoard.words
-          .filter((word) => word[0].group === group[0])[0]
-          .map((word) => word.text.toLowerCase()),
-      ]),
-    );
+    const targetWords = new Map();
+    colors.map((color) => {
+      const colorGroup = Object.entries(newBoard.groups)
+        .filter((group) => group[0] === color)
+        .map((group) => group[0]);
+      const colorWords = newBoard.words
+        .flat()
+        .filter((w) => w.group === color)
+        .map((w) => w.text.toLowerCase());
+
+      targetWords.set(colorGroup[0], colorWords);
+    });
     setTargetWords(targetWords);
 
     const newGrid = [];
-    const shuffledWords = [...words].sort(() => Math.random() - 0.5);
+    const shuffledWords = [...words];
 
     for (let i = 0; i < 4; i++) {
       const row = [];
@@ -120,6 +125,9 @@ const WordGrid = () => {
         colorWords.length > 0 &&
         colorWords.every((target) => selectedWords.includes(target))
       ) {
+        const newSolvedColors = [...solvedColors];
+        newSolvedColors.push(color);
+        setSolvedColors(newSolvedColors);
         colorSolved = true;
         const updatedGrid = [...grid];
         updatedGrid.forEach((row, rowIdx) => {
@@ -130,9 +138,21 @@ const WordGrid = () => {
               locked: locked,
               [`${color}Locked`]: locked,
               selected: false,
+              color: locked ? color : null,
             };
           });
         });
+        const sortedGridFlattened = updatedGrid
+          .flat()
+          .sort(
+            (a, b) =>
+              newSolvedColors.indexOf(b.color) -
+              newSolvedColors.indexOf(a.color),
+          );
+        updatedGrid[0] = sortedGridFlattened.slice(0, 4);
+        updatedGrid[1] = sortedGridFlattened.slice(4, 8);
+        updatedGrid[2] = sortedGridFlattened.slice(8, 12);
+        updatedGrid[3] = sortedGridFlattened.slice(12, 16);
         targetWords.set(color, []);
         setGrid(updatedGrid);
       }
@@ -155,33 +175,34 @@ const WordGrid = () => {
     return null;
   }
 
+  const SolvedTiles = colors
+    .sort((a, b) => solvedColors.indexOf(a) - solvedColors.indexOf(b))
+    .map((color) => {
+      if (targetWords.get(color).length !== 0) return null;
+      return (
+        <div key={color} className={`word-cell ${color}-locked answer`}>
+          <span>{board.groups[color]}</span>
+          <span className="answers">
+            {board.words
+              .flatMap((word) =>
+                word.filter((w) => w.group === color).map((w) => w.text),
+              )
+              .join(", ")}
+          </span>
+        </div>
+      );
+    });
+
   return (
     <div className="word-grid">
       {bannerText && <Banner text={bannerText}></Banner>}
-      {targetWords.get("yellow").length === 0 && (
-        <div className="word-cell yellow-locked answer">
-          {board.groups.yellow}
-        </div>
-      )}
-      {targetWords.get("green").length === 0 && (
-        <div className="word-cell green-locked answer">
-          {board.groups.green}
-        </div>
-      )}
-      {targetWords.get("blue").length === 0 && (
-        <div className="word-cell blue-locked answer">{board.groups.blue}</div>
-      )}
-      {targetWords.get("purple").length === 0 && (
-        <div className="word-cell purple-locked answer">
-          {board.groups.purple}
-        </div>
-      )}
+      {SolvedTiles}
       {grid.map((row, rowIndex) => (
         <div key={rowIndex} className="word-row">
           {row.map((cell, columnIndex) => (
             <div
               key={columnIndex}
-              className={`word-cell ${cell.selected ? "selected" : ""}  ${cell.yellowLocked ? "yellow-locked" : ""}  ${cell.greenLocked ? "green-locked" : ""}  ${cell.blueLocked ? "blue-locked" : ""}  ${cell.purpleLocked ? "purple-locked" : ""}`}
+              className={`word-cell ${cell.selected ? "selected" : ""}  ${cell.yellowLocked ? "yellow-locked" : ""}  ${cell.greenLocked ? "green-locked" : ""}  ${cell.blueLocked ? "blue-locked" : ""}  ${cell.purpleLocked ? "purple-locked" : ""} option`}
               onClick={() => handleWordClick(rowIndex, columnIndex)}
             >
               {cell.word.split(" ").map((wordPart, index) => (
