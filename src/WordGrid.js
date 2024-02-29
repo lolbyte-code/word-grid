@@ -264,7 +264,7 @@ const WordGrid = () => {
       if (targetWords.get(color).length !== 0) return null;
       const words = board.words
         .flatMap((word) =>
-          word.filter((w) => w.group === color).map((w) => w.uneditedText),
+          word.filter((w) => w.group === color).map((w) => w.uneditedText.trim()),
         )
         .join(", ");
       return (
