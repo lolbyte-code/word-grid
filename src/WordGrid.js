@@ -125,7 +125,7 @@ const WordGrid = () => {
           .length === 1;
       if (oneAway) {
         setTimeout(() => {
-          setBannerText("");
+          if (attemptsRemaining > 1) setBannerText("");
         }, "1000");
         setBannerText("one away...");
       }
