@@ -46,6 +46,11 @@
   color: black;
 }
 
+.game-link {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 20px
+}
+
 .clear-button {
   background-color: rgb(204, 206, 210);
 }
@@ -53,7 +58,8 @@
 .button-container {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
+  /* flex-direction: column; */
 }
 
 .link-button {

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./WordsInput.css";
 import { useStickyState, hasDuplicates } from "./Utils";
 import { serializeBoard, initialBoard, currentVersion } from "./Board";
@@ -7,6 +7,7 @@ const WordsInput = () => {
   const board = initialBoard();
   const [newBoard, setNewBoard] = useStickyState({ ...board }, "board");
   const [puzzleName, setPuzzleName] = useStickyState("", "puzzleName");
+  const [link, setLink] = useState("");
 
   const handleGroupChange = (color, event) => {
     const updatedBoard = { ...newBoard };
@@ -21,6 +22,7 @@ const WordsInput = () => {
   };
 
   const clearBoardHandler = () => {
+    setLink("");
     setNewBoard({ ...board });
   };
 
@@ -30,9 +32,7 @@ const WordsInput = () => {
       url: url,
       domain: `tiny.one`,
     };
-    navigator.clipboard.writeText(url);
-
-    let responseData = "";
+    setLink(url);
 
     fetch(`https://api.tinyurl.com/create`, {
       method: `POST`,
@@ -51,14 +51,11 @@ const WordsInput = () => {
         return response.json();
       })
       .then((data) => {
-        responseData = data;
+        setLink(data["data"]["tiny_url"]);
       })
       .catch((error) => {
         console.error(error);
       });
-    setTimeout(() => {
-      navigator.clipboard.writeText(responseData["data"]["tiny_url"]);
-    }, 1000);
   };
 
   const isBoardValid = () => {
@@ -132,10 +129,15 @@ const WordsInput = () => {
             className="link-button"
             onClick={() => generateLinkHandler(puzzleName)}
           >
-            Copy Link
+            Generate Link
           </button>
         )}
       </div>
+      {isBoardValid() && puzzleName && link && (
+        <a className="game-link" href={link}>
+          {link}
+        </a>
+      )}
     </div>
   );
 };
