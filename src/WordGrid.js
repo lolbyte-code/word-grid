@@ -29,7 +29,7 @@ const WordGrid = () => {
     );
 
     const targetWords = new Map();
-    colors.map((color) => {
+    colors.forEach((color) => {
       const colorGroup = Object.entries(newBoard.groups)
         .filter((group) => group[0] === color)
         .map((group) => group[0]);
@@ -60,7 +60,7 @@ const WordGrid = () => {
 
     setBoard(newBoard);
     setGrid(newGrid);
-  }, [boardHash]);
+  }, [boardHash, colors]);
 
   const handleWordClick = (rowIndex, columnIndex) => {
     const updatedGrid = [...grid];

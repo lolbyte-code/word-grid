@@ -25,9 +25,32 @@ const WordsInput = () => {
   };
 
   const generateLinkHandler = (puzzleName) => {
-    navigator.clipboard.writeText(
-      `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}?name=${encodeURIComponent(puzzleName)}`,
-    );
+    const url = `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}?name=${encodeURIComponent(puzzleName)}`;
+    let body = {
+      url: url,
+      domain: `tiny.one`,
+    };
+    let copyPasta = "asdf";
+
+    fetch(`https://api.tinyurl.com/create`, {
+      method: `POST`,
+      headers: {
+        accept: `application/json`,
+        authorization: `Bearer 2nLQGpsuegHP8l8J0Uq1TsVkCzP3un3T23uQ5YovVf5lvvGOucGmFOYRVj6L`,
+        "content-type": `application/json`,
+      },
+      body: JSON.stringify(body),
+    })
+      .then((response) => {
+        if (response.status != 200) throw `There was a problem with the fetch operation. Status Code: ${response.status}`;
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+        copyPasta = data["data"]["tiny_url"];
+        navigator.clipboard.writeText(copyPasta);
+      })
+      .catch((error) => console.error(error));
   };
 
   const isBoardValid = () => {
