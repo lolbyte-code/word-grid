@@ -87,7 +87,7 @@
 .clear-button,
 .link-button {
   font-family: "Poppins", sans-serif;
-  padding: 10px 20px;
+  padding: 10px 20.5px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -120,7 +120,7 @@
 
 .button-container {
   display: flex;
-  gap: 10px;
+  gap: 6px;
   margin-bottom: 10px;
 }
 
