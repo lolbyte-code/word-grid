@@ -55,6 +55,10 @@ const WordGrid = () => {
     const updatedGrid = [...grid];
     const clickedWord = updatedGrid[rowIndex][columnIndex];
 
+    if (clickedWord.locked) {
+      return;
+    }
+
     if (clickedWord.selected) {
       clickedWord.selected = false;
       setGrid(updatedGrid);
@@ -99,8 +103,8 @@ const WordGrid = () => {
       const colorWords = targetWords.get(color);
       const oneAway =
         colorWords.length > 0 &&
-        colorWords.filter((target) => !selectedWords.includes(target)).length ===
-          1;
+        colorWords.filter((target) => !selectedWords.includes(target))
+          .length === 1;
       if (oneAway) {
         setTimeout(() => {
           setBannerText("");
@@ -108,7 +112,6 @@ const WordGrid = () => {
         setBannerText("one away...");
       }
     });
-
 
     // Check for solves
     colors.forEach((color) => {
