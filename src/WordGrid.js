@@ -264,25 +264,19 @@ const WordGrid = () => {
       if (targetWords.get(color).length !== 0) return null;
       const words = board.words
         .flatMap((word) =>
-          word
-            .filter((w) => w.group === color)
-            .map((w) => w.uneditedText.trim()),
+          word.filter((w) => w.group === color).map((w) => w.text),
         )
         .join(", ");
       return (
         <div key={color} className={`word-cell ${color}-locked answer`}>
           <span>{board.groups[color]}</span>
-          <span className="answers">
-            {words.substr(0, 45)}
-            {words.length > 45 && <br />}
-            {words.length > 45 && words.substr(45)}
-          </span>
+          <span className="answers">{words}</span>
         </div>
       );
     });
 
   return (
-    <div className="word-grid">
+    <div>
       {bannerText && (
         <Banner text={bannerText} content={bannerContent}></Banner>
       )}
@@ -295,12 +289,7 @@ const WordGrid = () => {
               className={`word-cell ${cell.selected ? "selected" : ""}  ${cell.yellowLocked ? "yellow-locked" : ""}  ${cell.greenLocked ? "green-locked" : ""}  ${cell.blueLocked ? "blue-locked" : ""}  ${cell.purpleLocked ? "purple-locked" : ""} option`}
               onClick={() => handleWordClick(rowIndex, columnIndex)}
             >
-              {cell.word.split(" ").map((wordPart, index) => (
-                <span key={index}>
-                  {wordPart}
-                  {index < cell.word.split(" ").length - 1 && <br />}{" "}
-                </span>
-              ))}
+              <span>{cell.word}</span>
             </div>
           ))}
         </div>

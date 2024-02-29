@@ -82,7 +82,7 @@ const WordsInput = () => {
       row.map((word) => word.text),
     );
     const wordsComplete = allWords.every((word) => word !== "");
-    const wordsLessThanMax = allWords.every((word) => word.length < 23);
+    const wordsLessThanMax = allWords.every((word) => word.length <= 25);
     const noDuplicateWords = !hasDuplicates(allWords);
     const noDuplicateGroups = !hasDuplicates([
       newBoard.groups.yellow,
@@ -99,7 +99,7 @@ const WordsInput = () => {
       newValidations.push("Words may not be blank!");
     }
     if (!wordsLessThanMax) {
-      newValidations.push("Words cannot exceed 23 characters!");
+      newValidations.push("Words cannot exceed 25 characters!");
     }
     if (!noDuplicateWords) {
       newValidations.push("Duplicate words not allowed!");
