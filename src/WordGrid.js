@@ -209,16 +209,12 @@ const WordGrid = () => {
 
   useEffect(() => {
     if (!win) return;
+    setTimeout(() => {
+      setBannerText("");
+    }, "1000");
     setBannerText("good job!");
-    setBannerContent(
-      <div className="win-buttons">
-        <button className="share-button" onClick={() => handleShare()}>
-          Share
-        </button>
-        {showShareMessage && <p className="copy-text">Copied to clipboard!</p>}
-      </div>,
-    );
-  }, [win, showShareMessage]);
+    setHideSubmit(true);
+  }, [win]);
 
   const handleShare = () => {
     navigator.clipboard.writeText(
