@@ -60,7 +60,7 @@ const WordGrid = () => {
 
     setBoard(newBoard);
     setGrid(newGrid);
-  }, [boardHash, colors]);
+  }, [boardHash]);
 
   const handleWordClick = (rowIndex, columnIndex) => {
     const updatedGrid = [...grid];
