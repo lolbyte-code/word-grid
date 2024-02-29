@@ -72,6 +72,7 @@
   margin-bottom: 5px;
   border-style: none;
   box-sizing: border-box;
+  font-weight: 500;
 }
 
 .puzzle-name-container {
@@ -111,11 +112,13 @@
   border: 2px solid rgb(144, 146, 150);
   padding: 3px;
   border-radius: 5px;
+  font-weight: 500;
 }
 
 .clear-button {
   background-color: rgb(204, 206, 210);
   border: 2px solid rgb(144, 146, 150);
+  font-weight: 500;
 }
 
 .button-container {
@@ -127,4 +130,5 @@
 .link-button {
   background-color: rgb(232, 167, 83);
   border: 2px solid rgb(195 127 39);
+  font-weight: 500;
 }
