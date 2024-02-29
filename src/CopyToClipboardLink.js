@@ -17,16 +17,16 @@ const CopyToClipboardLink = ({ link }) => {
   };
 
   return (
-    <div className="link-container">
+    <div>
       <a
         className="game-link"
         href={link}
         target="_blank"
         rel="noopener noreferrer"
       >
-        {link}
+        {`${link.substr(0, 30)}${link.length > 30 && "..."}`}
       </a>
-      <button className="game-link" onClick={handleCopyToClipboard}>
+      <button className="game-link-button" onClick={handleCopyToClipboard}>
         {isCopied ? "Copied!" : "Copy"}
       </button>
     </div>

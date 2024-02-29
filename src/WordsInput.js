@@ -156,19 +156,16 @@ const WordsInput = () => {
       </div>
       <div className="input-button-container">
         {showValidations && <ValidationErrorList errors={validations} />}
-        <label>
+        <div className="puzzle-name-container">
           <input
             type="text"
             placeholder="Puzzle Name"
             value={puzzleName}
             onChange={(event) => setPuzzleName(event.target.value)}
-            className="word-input"
+            className="word-input puzzle-name-input"
             disabled={!isBoardValid() && validations.length > 1}
           />
-        </label>
-        {isBoardValid() && link && (
-          <CopyToClipboardLink className="game-link" link={link} />
-        )}
+        </div>
         <div className="button-container">
           <button className="clear-button" onClick={() => clearBoardHandler()}>
             Clear Board
@@ -177,6 +174,7 @@ const WordsInput = () => {
             Generate Link
           </button>
         </div>
+        {isBoardValid() && link && <CopyToClipboardLink link={link} />}
       </div>
     </div>
   );

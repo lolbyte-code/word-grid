@@ -12,6 +12,13 @@
   flex-direction: column;
   align-items: center;
   margin: 0 auto;
+  background-color: rgb(238 240 245);
+  border: 2px solid rgb(90, 89, 78);
+  border-radius: 5px;
+  padding: 10px;
+  max-width: 300px;
+  margin-bottom: 20px;
+  margin-top: 8px;
 }
 
 .word-group {
@@ -22,31 +29,59 @@
 }
 
 .yellow-word-group {
-  border: 2px solid rgb(249, 223, 109);
+  border: 2px solid rgb(230, 199, 61);
   background-color: rgb(249, 223, 109);
 }
 
+.yellow-word-group input {
+  border: 2px solid rgb(230, 199, 61);
+}
+
 .green-word-group {
-  border: 2px solid rgb(160, 195, 90);
+  border: 2px solid rgb(114, 141, 61);
   background-color: rgb(160, 195, 90);
 }
 
+.green-word-group input {
+  border: 2px solid rgb(114, 141, 61);
+}
+
 .blue-word-group {
-  border: 2px solid rgb(176, 196, 239);
+  border: 2px solid rgb(110, 149, 235);
   background-color: rgb(176, 196, 239);
 }
 
+.blue-word-group input {
+  border: 2px solid rgb(110, 149, 235);
+}
+
 .purple-word-group {
-  border: 2px solid rgb(186, 129, 197);
+  border: 2px solid rgb(154, 57, 173);
   background-color: rgb(186, 129, 197);
 }
 
+.purple-word-group input {
+  border: 2px solid rgb(154, 57, 173);
+}
+
 .word-input {
+  border-radius: 5px;
   font-family: "Poppins", sans-serif;
   width: 100%;
-  padding: 8px;
-  margin-bottom: 8px;
+  padding: 12px;
+  margin-bottom: 5px;
+  border-style: none;
   box-sizing: border-box;
+}
+
+.puzzle-name-container {
+  width: 89%;
+  margin: 10px;
+}
+
+.puzzle-name-input {
+  border-style: solid;
+  margin-bottom: 0px;
 }
 
 .clear-button,
@@ -62,24 +97,34 @@
 .game-link {
   font-family: "Poppins", sans-serif;
   font-size: small;
-  margin-bottom: 10px;
-  margin-right: 10px;
+  margin-right: 5px;
+  border: 2px solid rgb(144, 146, 150);
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.game-link-button {
+  font-family: "Poppins", sans-serif;
+  font-size: small;
+  margin-bottom: 5px;
+  background-color: rgb(204, 206, 210);
+  border: 2px solid rgb(144, 146, 150);
+  padding: 3px;
+  border-radius: 5px;
 }
 
 .clear-button {
   background-color: rgb(204, 206, 210);
+  border: 2px solid rgb(144, 146, 150);
 }
 
 .button-container {
   display: flex;
   gap: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .link-button {
   background-color: rgb(232, 167, 83);
-}
-
-.link-container {
-  display: flex;
+  border: 2px solid rgb(195 127 39);
 }
