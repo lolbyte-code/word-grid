@@ -146,3 +146,7 @@
 .copy-text {
   font-size: min(2.5vw, 20px);
 }
+
+.long-word {
+  font-size: min(1.9vw, 19px);
+}
