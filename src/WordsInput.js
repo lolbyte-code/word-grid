@@ -30,6 +30,7 @@ const WordsInput = () => {
       url: url,
       domain: `tiny.one`,
     };
+    navigator.clipboard.writeText(url);
 
     fetch(`https://api.tinyurl.com/create`, {
       method: `POST`,
@@ -41,14 +42,18 @@ const WordsInput = () => {
       body: JSON.stringify(body),
     })
       .then((response) => {
-        if (response.status != 200) throw `There was a problem with the fetch operation. Status Code: ${response.status}`;
+        if (response.status !== 200)
+          throw new Error(
+            `There was a problem with the fetch operation. Status Code: ${response.status}`,
+          );
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         navigator.clipboard.writeText(data["data"]["tiny_url"]);
       })
-      .catch((error) => console.error(error));
+      .catch((error) => {
+        console.error(error);
+      });
   };
 
   const isBoardValid = () => {
@@ -62,8 +67,15 @@ const WordsInput = () => {
     );
     const wordsComplete = allWords.every((word) => word !== "");
     const noDuplicateWords = !hasDuplicates(allWords);
-    const noDuplicateGroups = !hasDuplicates([newBoard.groups.yellow, newBoard.groups.green, newBoard.groups.blue, newBoard.groups.purple])
-    return keysComplete && wordsComplete && noDuplicateWords && noDuplicateGroups;
+    const noDuplicateGroups = !hasDuplicates([
+      newBoard.groups.yellow,
+      newBoard.groups.green,
+      newBoard.groups.blue,
+      newBoard.groups.purple,
+    ]);
+    return (
+      keysComplete && wordsComplete && noDuplicateWords && noDuplicateGroups
+    );
   };
 
   const groupColors = Object.entries(newBoard.groups).map((group) => group[0]);
