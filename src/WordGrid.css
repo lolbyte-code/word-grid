@@ -101,7 +101,8 @@
   margin-top: 10px;
 }
 
-.submit-button {
+.submit-button,
+.share-button {
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
   border: none;

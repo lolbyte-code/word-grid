@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import "./WordGrid.css";
-import { useParams } from "react-router-dom";
+import { useParams, useSearchParams } from "react-router-dom";
 import { deserializeBoard, initialBoard, currentVersion } from "./Board";
 import AttemptsRemaining from "./Attempts";
 import Banner from "./Banner";
-import { setEquals } from "./Utils";
+import { setEquals, shareResultsCopyPasta } from "./Utils";
 
 const WordGrid = () => {
+  const [searchParams] = useSearchParams();
   const { boardHash } = useParams();
   const [board, setBoard] = useState(initialBoard());
   const colors = Object.entries(board.groups).map((group) => group[0]);
@@ -15,12 +16,17 @@ const WordGrid = () => {
   const [targetWords, setTargetWords] = useState({});
   const [attemptsRemaining, setAttemptsRemaining] = useState(4);
   const [bannerText, setBannerText] = useState("");
+  const [bannerContent, setBannerContent] = useState(null);
   const [guesses, setGuesses] = useState([]);
   const [solvedColors, setSolvedColors] = useState([]);
+  const [moves, setMoves] = useState([]);
 
   useEffect(() => {
     const newBoard = deserializeBoard(boardHash, currentVersion);
     const words = newBoard.words.flatMap((word) => word.map((w) => w.text));
+    const wordColors = newBoard.words.flatMap((word) =>
+      word.map((w) => w.group),
+    );
 
     const targetWords = new Map();
     colors.map((color) => {
@@ -37,16 +43,16 @@ const WordGrid = () => {
     setTargetWords(targetWords);
 
     const newGrid = [];
-    const shuffledWords = [...words];
 
     for (let i = 0; i < 4; i++) {
       const row = [];
       for (let j = 0; j < 4; j++) {
         const index = i * 4 + j;
         row.push({
-          word: shuffledWords[index],
+          word: words[index],
           selected: false,
           locked: false,
+          color: wordColors[index],
         });
       }
       newGrid.push(row);
@@ -88,6 +94,10 @@ const WordGrid = () => {
       .flat()
       .filter((cell) => cell.selected)
       .map((cell) => cell.word.toLowerCase());
+    const selectedColors = grid
+      .flat()
+      .filter((cell) => cell.selected)
+      .map((cell) => cell.color);
 
     // Check if already guessed
     const selectedWordsSet = new Set(selectedWords);
@@ -138,7 +148,6 @@ const WordGrid = () => {
               locked: locked,
               [`${color}Locked`]: locked,
               selected: false,
-              color: locked ? color : null,
             };
           });
         });
@@ -158,17 +167,43 @@ const WordGrid = () => {
       }
     });
 
+    const newMoves = [...moves];
+    newMoves.push(selectedColors);
+    setMoves(newMoves);
+
     // Check if game is over / update attempts
     if (!colorSolved) {
       setAttemptsRemaining(attemptsRemaining - 1);
       if (attemptsRemaining === 1) {
         setBannerText("better luck next time...");
+        setBannerContent(
+          <button
+            className="share-button"
+            onClick={() => handleShare(newMoves)}
+          >
+            Share
+          </button>,
+        );
       }
     } else {
       if (Array.from(targetWords).every((color) => color[1].length === 0)) {
         setBannerText("good job!");
+        setBannerContent(
+          <button
+            className="share-button"
+            onClick={() => handleShare(newMoves)}
+          >
+            Share
+          </button>,
+        );
       }
     }
+  };
+
+  const handleShare = (moves) => {
+    navigator.clipboard.writeText(
+      shareResultsCopyPasta(moves, searchParams.get("name")),
+    );
   };
 
   if (!grid) {
@@ -195,7 +230,9 @@ const WordGrid = () => {
 
   return (
     <div className="word-grid">
-      {bannerText && <Banner text={bannerText}></Banner>}
+      {bannerText && (
+        <Banner text={bannerText} content={bannerContent}></Banner>
+      )}
       {SolvedTiles}
       {grid.map((row, rowIndex) => (
         <div key={rowIndex} className="word-row">

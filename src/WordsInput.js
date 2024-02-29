@@ -6,6 +6,7 @@ import { serializeBoard, initialBoard, currentVersion } from "./Board";
 const WordsInput = () => {
   const board = initialBoard();
   const [newBoard, setNewBoard] = useStickyState({ ...board }, "board");
+  const [puzzleName, setPuzzleName] = useStickyState("", "puzzleName");
 
   const handleGroupChange = (color, event) => {
     const updatedBoard = { ...newBoard };
@@ -23,9 +24,9 @@ const WordsInput = () => {
     setNewBoard({ ...board });
   };
 
-  const generateLinkHandler = () => {
+  const generateLinkHandler = (puzzleName) => {
     navigator.clipboard.writeText(
-      `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}`,
+      `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}?name=${encodeURIComponent(puzzleName)}`,
     );
   };
 
@@ -72,12 +73,26 @@ const WordsInput = () => {
           ))}
         </div>
       ))}
+      {isBoardValid() && (
+        <label>
+          <input
+            type="text"
+            placeholder="Puzzle Name"
+            value={puzzleName}
+            onChange={(event) => setPuzzleName(event.target.value)}
+            className="word-input"
+          />
+        </label>
+      )}
       <div className="button-container">
         <button className="clear-button" onClick={() => clearBoardHandler()}>
           Clear Board
         </button>
-        {isBoardValid() && (
-          <button className="link-button" onClick={() => generateLinkHandler()}>
+        {isBoardValid() && puzzleName !== "" && (
+          <button
+            className="link-button"
+            onClick={() => generateLinkHandler(puzzleName)}
+          >
             Copy Link
           </button>
         )}

@@ -19,3 +19,28 @@ export const hasDuplicates = (array) => {
 
 export const setEquals = (xs, ys) =>
   xs.size === ys.size && [...xs].every((x) => ys.has(x));
+
+export const shareResultsCopyPasta = (moves, name) => {
+  const result = ["Tony's Connections", name];
+  moves.forEach((move) => {
+    let row = [];
+    move.forEach((color) => {
+      switch (color) {
+        case "yellow":
+          row.push("🟨");
+          break;
+        case "green":
+          row.push("🟩");
+          break;
+        case "blue":
+          row.push("🟦");
+          break;
+        default:
+          row.push("🟪");
+          break;
+      }
+    });
+    result.push(row.join(""));
+  });
+  return result.join("\n");
+};

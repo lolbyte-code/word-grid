@@ -1,10 +1,11 @@
 import React from "react";
 import "./Banner.css";
 
-const Banner = ({ text }) => {
+const Banner = ({ text, content }) => {
   return (
     <div className="banner-container">
       <div className="banner-text">{text}</div>
+      <div>{content}</div>
     </div>
   );
 };
