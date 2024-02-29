@@ -110,6 +110,15 @@
   cursor: pointer;
   color: black;
   width: 15vh;
-  margin: auto;
+  margin: 10px;
   background-color: rgb(204, 206, 210);
+}
+
+.submit-button {
+  margin: auto;
+}
+
+.loss-buttons {
+  display: flex;
+  flex-direction: column;
 }

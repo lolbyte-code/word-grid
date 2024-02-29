@@ -21,6 +21,8 @@ const WordGrid = () => {
   const [solvedColors, setSolvedColors] = useState([]);
   const [moves, setMoves] = useState([]);
   const [lost, setLost] = useState(false);
+  const [win, setWin] = useState(false);
+  const [hideSubmit, setHideSubmit] = useState(false);
 
   useEffect(() => {
     const newBoard = deserializeBoard(boardHash, currentVersion);
@@ -175,48 +177,74 @@ const WordGrid = () => {
     // Check if game is over / update attempts
     if (!colorSolved) {
       setAttemptsRemaining(attemptsRemaining - 1);
-      if (attemptsRemaining === 1) {
+      if (attemptsRemaining <= 1) {
         setLost(true);
-        setBannerText("better luck next time...");
-        setBannerContent(
-          <button
-            className="share-button"
-            onClick={() => handleShare(newMoves)}
-          >
-            Share
-          </button>,
-        );
       }
     } else {
       if (Array.from(targetWords).every((color) => color[1].length === 0)) {
-        setBannerText("good job!");
-        setBannerContent(
-          <button
-            className="share-button"
-            onClick={() => handleShare(newMoves)}
-          >
-            Share
-          </button>,
-        );
+        setWin(true);
       }
     }
   };
 
-  // TODO: remove this hack
   useEffect(() => {
     if (!lost) return;
     setBannerText("better luck next time...");
     setBannerContent(
-      <button className="share-button" onClick={() => handleShare(moves)}>
-        Share
-      </button>,
+      <div className="loss-buttons">
+        <button className="share-button" onClick={() => handleShare()}>
+          Share
+        </button>
+        <button className="share-button" onClick={() => handleTryAgain()}>
+          Try Again
+        </button>
+        <button className="share-button" onClick={() => handleReveal()}>
+          Reveal
+        </button>
+      </div>,
     );
   }, [lost]);
 
-  const handleShare = (moves) => {
+  useEffect(() => {
+    if (!win) return;
+    setBannerText("good job!");
+    setBannerContent(
+      <div>
+        <button className="share-button" onClick={() => handleShare()}>
+          Share
+        </button>
+      </div>,
+    );
+  }, [win]);
+
+  const handleShare = () => {
     navigator.clipboard.writeText(
       shareResultsCopyPasta(moves, searchParams.get("name")),
     );
+  };
+
+  const handleTryAgain = () => {
+    window.location.reload();
+  };
+
+  const handleReveal = () => {
+    colors.forEach((color) => {
+      const updatedGrid = [...grid];
+      updatedGrid.forEach((row, rowIdx) => {
+        row.forEach((cell, cellIdx) => {
+          updatedGrid[rowIdx][cellIdx] = {
+            ...cell,
+            locked: true,
+            [`${color}Locked`]: true,
+            selected: false,
+          };
+        });
+      });
+      targetWords.set(color, []);
+      setGrid(updatedGrid);
+      setBannerText("");
+      setHideSubmit(true);
+    });
   };
 
   if (!grid) {
@@ -229,11 +257,9 @@ const WordGrid = () => {
       if (targetWords.get(color).length !== 0) return null;
       const words = board.words
         .flatMap((word) =>
-          word
-            .filter((w) => w.group === color)
-            .map((w) => w.uneditedText),
+          word.filter((w) => w.group === color).map((w) => w.uneditedText),
         )
-        .join(", ")
+        .join(", ");
       return (
         <div key={color} className={`word-cell ${color}-locked answer`}>
           <span>{board.groups[color]}</span>
@@ -272,8 +298,11 @@ const WordGrid = () => {
       ))}
       <div className="action-container">
         <AttemptsRemaining attempts={attemptsRemaining} />
-        <button className="submit-button" onClick={() => handleSubmit()}>
-          Submit
+        <button
+          className="submit-button"
+          onClick={() => (hideSubmit ? handleShare() : handleSubmit())}
+        >
+          {hideSubmit ? "Share" : "Submit"}
         </button>
       </div>
     </div>

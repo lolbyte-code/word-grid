@@ -68,7 +68,9 @@ const WordsInput = () => {
     const allWords = newBoard.words.flatMap((row) =>
       row.map((word) => word.text),
     );
-    const wordsComplete = allWords.every((word) => word !== "");
+    const wordsComplete = allWords.every(
+      (word) => word !== "" && word.length < 23,
+    );
     const noDuplicateWords = !hasDuplicates(allWords);
     const noDuplicateGroups = !hasDuplicates([
       newBoard.groups.yellow,
