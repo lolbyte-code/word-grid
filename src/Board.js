@@ -132,7 +132,7 @@ export function deserializeBoard(boardHash, version) {
 const lineBreakWord = (word) => {
   return word
     .trim()
-    .match(/[^ ]{1,8}/g)
+    .match(/[^ ]{1,9}/g)
     .join(" ");
 };
 
