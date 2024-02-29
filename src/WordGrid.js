@@ -20,6 +20,7 @@ const WordGrid = () => {
   const [guesses, setGuesses] = useState([]);
   const [solvedColors, setSolvedColors] = useState([]);
   const [moves, setMoves] = useState([]);
+  const [lost, setLost] = useState(false);
 
   useEffect(() => {
     const newBoard = deserializeBoard(boardHash, currentVersion);
@@ -175,6 +176,7 @@ const WordGrid = () => {
     if (!colorSolved) {
       setAttemptsRemaining(attemptsRemaining - 1);
       if (attemptsRemaining === 1) {
+        setLost(true);
         setBannerText("better luck next time...");
         setBannerContent(
           <button
@@ -200,6 +202,17 @@ const WordGrid = () => {
     }
   };
 
+  // TODO: remove this hack
+  useEffect(() => {
+    if (!lost) return;
+    setBannerText("better luck next time...");
+    setBannerContent(
+      <button className="share-button" onClick={() => handleShare(moves)}>
+        Share
+      </button>,
+    );
+  }, [lost]);
+
   const handleShare = (moves) => {
     navigator.clipboard.writeText(
       shareResultsCopyPasta(moves, searchParams.get("name")),
@@ -220,7 +233,9 @@ const WordGrid = () => {
           <span className="answers">
             {board.words
               .flatMap((word) =>
-                word.filter((w) => w.group === color).map((w) => w.text),
+                word
+                  .filter((w) => w.group === color)
+                  .map((w) => w.uneditedText),
               )
               .join(", ")}
           </span>

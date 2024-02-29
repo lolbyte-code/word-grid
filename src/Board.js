@@ -75,39 +75,55 @@ export function deserializeBoard(boardHash, version) {
   colorMap.set(list[19], "purple");
 
   board.words[0][0].text = lineBreakWord(list[20]);
+  board.words[0][0].uneditedText = list[20];
   board.words[0][0].group = colorMap.get(list[20]);
   board.words[0][1].text = lineBreakWord(list[21]);
+  board.words[0][1].uneditedText = list[21];
   board.words[0][1].group = colorMap.get(list[21]);
   board.words[0][2].text = lineBreakWord(list[22]);
+  board.words[0][2].uneditedText = list[22];
   board.words[0][2].group = colorMap.get(list[22]);
   board.words[0][3].text = lineBreakWord(list[23]);
+  board.words[0][3].uneditedText = list[23];
   board.words[0][3].group = colorMap.get(list[23]);
 
   board.words[1][0].text = lineBreakWord(list[24]);
+  board.words[1][0].uneditedText = list[24];
   board.words[1][0].group = colorMap.get(list[24]);
   board.words[1][1].text = lineBreakWord(list[25]);
+  board.words[1][1].uneditedText = list[25];
   board.words[1][1].group = colorMap.get(list[25]);
   board.words[1][2].text = lineBreakWord(list[26]);
+  board.words[1][2].uneditedText = list[26];
   board.words[1][2].group = colorMap.get(list[26]);
   board.words[1][3].text = lineBreakWord(list[27]);
+  board.words[1][3].uneditedText = list[27];
   board.words[1][3].group = colorMap.get(list[27]);
 
   board.words[2][0].text = lineBreakWord(list[28]);
+  board.words[2][0].uneditedText = list[28];
   board.words[2][0].group = colorMap.get(list[28]);
   board.words[2][1].text = lineBreakWord(list[29]);
+  board.words[2][1].uneditedText = list[29];
   board.words[2][1].group = colorMap.get(list[29]);
   board.words[2][2].text = lineBreakWord(list[30]);
+  board.words[2][2].uneditedText = list[30];
   board.words[2][2].group = colorMap.get(list[30]);
   board.words[2][3].text = lineBreakWord(list[31]);
+  board.words[2][3].uneditedText = list[31];
   board.words[2][3].group = colorMap.get(list[31]);
 
   board.words[3][0].text = lineBreakWord(list[32]);
+  board.words[3][0].uneditedText = list[32];
   board.words[3][0].group = colorMap.get(list[32]);
   board.words[3][1].text = lineBreakWord(list[33]);
+  board.words[3][1].uneditedText = list[33];
   board.words[3][1].group = colorMap.get(list[33]);
   board.words[3][2].text = lineBreakWord(list[34]);
+  board.words[3][2].uneditedText = list[34];
   board.words[3][2].group = colorMap.get(list[34]);
   board.words[3][3].text = lineBreakWord(list[35]);
+  board.words[3][3].uneditedText = list[35];
   board.words[3][3].group = colorMap.get(list[35]);
 
   return board;
