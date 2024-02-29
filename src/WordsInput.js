@@ -125,7 +125,7 @@ const WordsInput = () => {
         <CopyToClipboardLink className="game-link" link={link} />
       )}
       <div className="button-container">
-        <button onClick={() => clearBoardHandler()}>
+        <button className="clear-button" onClick={() => clearBoardHandler()}>
           Clear Board
         </button>
         {isBoardValid() && puzzleName !== "" && (
