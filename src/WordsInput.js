@@ -32,6 +32,8 @@ const WordsInput = () => {
     };
     navigator.clipboard.writeText(url);
 
+    let responseData = "";
+
     fetch(`https://api.tinyurl.com/create`, {
       method: `POST`,
       headers: {
@@ -49,11 +51,14 @@ const WordsInput = () => {
         return response.json();
       })
       .then((data) => {
-        navigator.clipboard.writeText(data["data"]["tiny_url"]);
+        responseData = data;
       })
       .catch((error) => {
         console.error(error);
       });
+    setTimeout(() => {
+      navigator.clipboard.writeText(responseData["data"]["tiny_url"]);
+    }, 1000);
   };
 
   const isBoardValid = () => {
