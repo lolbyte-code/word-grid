@@ -74,43 +74,50 @@ export function deserializeBoard(boardHash, version) {
   colorMap.set(list[18], "purple");
   colorMap.set(list[19], "purple");
 
-  board.words[0][0].text = list[20];
+  board.words[0][0].text = lineBreakWord(list[20]);
   board.words[0][0].group = colorMap.get(list[20]);
-  board.words[0][1].text = list[21];
+  board.words[0][1].text = lineBreakWord(list[21]);
   board.words[0][1].group = colorMap.get(list[21]);
-  board.words[0][2].text = list[22];
+  board.words[0][2].text = lineBreakWord(list[22]);
   board.words[0][2].group = colorMap.get(list[22]);
-  board.words[0][3].text = list[23];
+  board.words[0][3].text = lineBreakWord(list[23]);
   board.words[0][3].group = colorMap.get(list[23]);
 
-  board.words[1][0].text = list[24];
+  board.words[1][0].text = lineBreakWord(list[24]);
   board.words[1][0].group = colorMap.get(list[24]);
-  board.words[1][1].text = list[25];
+  board.words[1][1].text = lineBreakWord(list[25]);
   board.words[1][1].group = colorMap.get(list[25]);
-  board.words[1][2].text = list[26];
+  board.words[1][2].text = lineBreakWord(list[26]);
   board.words[1][2].group = colorMap.get(list[26]);
-  board.words[1][3].text = list[27];
+  board.words[1][3].text = lineBreakWord(list[27]);
   board.words[1][3].group = colorMap.get(list[27]);
 
-  board.words[2][0].text = list[28];
+  board.words[2][0].text = lineBreakWord(list[28]);
   board.words[2][0].group = colorMap.get(list[28]);
-  board.words[2][1].text = list[29];
+  board.words[2][1].text = lineBreakWord(list[29]);
   board.words[2][1].group = colorMap.get(list[29]);
-  board.words[2][2].text = list[30];
+  board.words[2][2].text = lineBreakWord(list[30]);
   board.words[2][2].group = colorMap.get(list[30]);
-  board.words[2][3].text = list[31];
+  board.words[2][3].text = lineBreakWord(list[31]);
   board.words[2][3].group = colorMap.get(list[31]);
 
-  board.words[3][0].text = list[32];
+  board.words[3][0].text = lineBreakWord(list[32]);
   board.words[3][0].group = colorMap.get(list[32]);
-  board.words[3][1].text = list[33];
+  board.words[3][1].text = lineBreakWord(list[33]);
   board.words[3][1].group = colorMap.get(list[33]);
-  board.words[3][2].text = list[34];
+  board.words[3][2].text = lineBreakWord(list[34]);
   board.words[3][2].group = colorMap.get(list[34]);
-  board.words[3][3].text = list[35];
+  board.words[3][3].text = lineBreakWord(list[35]);
   board.words[3][3].group = colorMap.get(list[35]);
 
   return board;
 }
+
+const lineBreakWord = (word) => {
+  return word
+    .trim()
+    .match(/.{1,8}/g)
+    .join(" ");
+};
 
 export const currentVersion = "v1";
