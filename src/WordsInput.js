@@ -3,7 +3,6 @@ import "./WordsInput.css";
 import { useStickyState, hasDuplicates, setEquals } from "./Utils";
 import { serializeBoard, initialBoard, currentVersion } from "./Board";
 import CopyToClipboardLink from "./CopyToClipboardLink";
-import Banner from "./Banner";
 import ValidationErrorList from "./ValidationErrorList";
 
 const WordsInput = () => {
@@ -127,53 +126,57 @@ const WordsInput = () => {
   const groupColors = Object.entries(newBoard.groups).map((group) => group[0]);
 
   return (
-    <div className="words-input-container">
-      {groupColors.map((color, groupIndex) => (
-        <div key={groupIndex} className={`word-group ${color}-word-group`}>
-          <label>
-            <input
-              type="text"
-              placeholder={`${color.charAt(0).toUpperCase() + color.slice(1)} Group Title`}
-              value={newBoard.groups[color]}
-              onChange={(event) => handleGroupChange(color, event)}
-              className="word-input"
-            />
-          </label>
-          {newBoard.words[groupIndex].map((word, wordIndex) => (
-            <input
-              key={wordIndex}
-              type="text"
-              placeholder={`Word ${wordIndex + 1}`}
-              value={word.text}
-              onChange={(event) =>
-                handleWordChange(groupIndex, wordIndex, event)
-              }
-              className="word-input"
-            />
-          ))}
+    <div>
+      <div className="input-words-container">
+        {groupColors.map((color, groupIndex) => (
+          <div key={groupIndex} className={`word-group ${color}-word-group`}>
+            <label>
+              <input
+                type="text"
+                placeholder={`${color.charAt(0).toUpperCase() + color.slice(1)} Group Title`}
+                value={newBoard.groups[color]}
+                onChange={(event) => handleGroupChange(color, event)}
+                className="word-input"
+              />
+            </label>
+            {newBoard.words[groupIndex].map((word, wordIndex) => (
+              <input
+                key={wordIndex}
+                type="text"
+                placeholder={`Word ${wordIndex + 1}`}
+                value={word.text}
+                onChange={(event) =>
+                  handleWordChange(groupIndex, wordIndex, event)
+                }
+                className="word-input"
+              />
+            ))}
+          </div>
+        ))}
+      </div>
+      <div className="input-button-container">
+        {showValidations && <ValidationErrorList errors={validations} />}
+        <label>
+          <input
+            type="text"
+            placeholder="Puzzle Name"
+            value={puzzleName}
+            onChange={(event) => setPuzzleName(event.target.value)}
+            className="word-input"
+            disabled={!isBoardValid() && validations.length > 1}
+          />
+        </label>
+        {isBoardValid() && link && (
+          <CopyToClipboardLink className="game-link" link={link} />
+        )}
+        <div className="button-container">
+          <button className="clear-button" onClick={() => clearBoardHandler()}>
+            Clear Board
+          </button>
+          <button className="link-button" onClick={() => generateLinkHandler()}>
+            Generate Link
+          </button>
         </div>
-      ))}
-      {showValidations && <ValidationErrorList errors={validations} />}
-      <label>
-        <input
-          type="text"
-          placeholder="Puzzle Name"
-          value={puzzleName}
-          onChange={(event) => setPuzzleName(event.target.value)}
-          className="word-input"
-          disabled={!isBoardValid() && validations.length > 1}
-        />
-      </label>
-      {isBoardValid() && link && (
-        <CopyToClipboardLink className="game-link" link={link} />
-      )}
-      <div className="button-container">
-        <button className="clear-button" onClick={() => clearBoardHandler()}>
-          Clear Board
-        </button>
-        <button className="link-button" onClick={() => generateLinkHandler()}>
-          Generate Link
-        </button>
       </div>
     </div>
   );
