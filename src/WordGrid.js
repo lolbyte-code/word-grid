@@ -73,6 +73,7 @@ const WordGrid = () => {
 
     setBoard(newBoard);
     setGrid(newGrid);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [boardHash]);
 
   const handleWordClick = (rowIndex, columnIndex) => {
@@ -218,6 +219,7 @@ const WordGrid = () => {
         </button>
       </div>,
     );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lost, showShareMessage]);
 
   useEffect(() => {
