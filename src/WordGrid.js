@@ -41,7 +41,7 @@ const WordGrid = () => {
       word.map((w) => w.group),
     );
 
-    const targetWords = new Map();
+    const newTargetWords = new Map();
     colors.forEach((color) => {
       const colorGroup = Object.entries(newBoard.groups)
         .filter((group) => group[0] === color)
@@ -51,9 +51,9 @@ const WordGrid = () => {
         .filter((w) => w.group === color)
         .map((w) => w.text.toLowerCase());
 
-      targetWords.set(colorGroup[0], colorWords);
+      newTargetWords.set(colorGroup[0], colorWords);
     });
-    setTargetWords(targetWords);
+    setTargetWords(newTargetWords);
 
     const newGrid = [];
 
@@ -175,7 +175,7 @@ const WordGrid = () => {
               newSolvedColors.indexOf(b.color) -
               newSolvedColors.indexOf(a.color),
           );
-        updatedGrid[0] = sortedGridFlattened.slice(0, 4);
+        updatedGrid[0] = [];
         updatedGrid[1] = sortedGridFlattened.slice(4, 8);
         updatedGrid[2] = sortedGridFlattened.slice(8, 12);
         updatedGrid[3] = sortedGridFlattened.slice(12, 16);
@@ -244,23 +244,16 @@ const WordGrid = () => {
   };
 
   const handleReveal = () => {
-    colors.forEach((color) => {
-      const updatedGrid = [...grid];
-      updatedGrid.forEach((row, rowIdx) => {
-        row.forEach((cell, cellIdx) => {
-          updatedGrid[rowIdx][cellIdx] = {
-            ...cell,
-            locked: true,
-            [`${color}Locked`]: true,
-            selected: false,
-          };
-        });
-      });
+    const unsolvedColors = colors.filter(
+      (color) => solvedColors.indexOf(color) === -1,
+    );
+    unsolvedColors.forEach((color) => {
       targetWords.set(color, []);
-      setGrid(updatedGrid);
-      setBannerText("");
-      setHideSubmit(true);
     });
+    setSolvedColors(solvedColors.concat(unsolvedColors));
+    setGrid([]);
+    setBannerText("");
+    setHideSubmit(true);
   };
 
   if (boardHashInvalid) {
