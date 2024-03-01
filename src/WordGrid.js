@@ -5,6 +5,7 @@ import { deserializeBoard, initialBoard, currentVersion } from "./Board";
 import AttemptsRemaining from "./Attempts";
 import Banner from "./Banner";
 import { setEquals, shareResultsCopyPasta } from "./Utils";
+import NotFound from "./NotFound";
 
 const WordGrid = () => {
   const [searchParams] = useSearchParams();
@@ -24,9 +25,16 @@ const WordGrid = () => {
   const [win, setWin] = useState(false);
   const [hideSubmit, setHideSubmit] = useState(false);
   const [showShareMessage, setShowShareMessage] = useState(false);
+  const [boardHashInvalid, setBoardHashInvalid] = useState(false);
 
   useEffect(() => {
-    const newBoard = deserializeBoard(boardHash, currentVersion);
+    let newBoard;
+    try {
+      newBoard = deserializeBoard(boardHash, currentVersion);
+    } catch (error) {
+      setBoardHashInvalid(true);
+      return;
+    }
     const words = newBoard.words.flatMap((word) => word.map((w) => w.text));
     const wordColors = newBoard.words.flatMap((word) =>
       word.map((w) => w.group),
@@ -249,6 +257,10 @@ const WordGrid = () => {
       setHideSubmit(true);
     });
   };
+
+  if (boardHashInvalid) {
+    return <NotFound />;
+  }
 
   if (!grid) {
     return null;
