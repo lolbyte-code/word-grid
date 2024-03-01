@@ -7,7 +7,6 @@
 .word-cell {
   font-weight: 600;
   font-family: "Poppins", sans-serif;
-  padding: 2vw;
   text-align: center;
   margin: 0.9vw;
   background-color: #f0f0f0;
@@ -15,11 +14,11 @@
   border-radius: 2vw;
   text-transform: uppercase;
   user-select: none;
-  width: 15vw;
-  height: 15vw;
-  max-height: 70px;
+  width: 20vw;
+  height: 20vw;
+  max-height: 95px;
   overflow: hidden;
-  font-size: min(2.5vw, 19px);
+  font-size: min(3.1vw, 19px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -86,7 +85,7 @@
 }
 
 .answer {
-  width: 78vw;
+  width: 88.2vw;
 }
 
 .answers {
@@ -145,8 +144,4 @@
 
 .copy-text {
   font-size: min(2.5vw, 20px);
-}
-
-.long-word {
-  font-size: min(1.9vw, 19px);
 }

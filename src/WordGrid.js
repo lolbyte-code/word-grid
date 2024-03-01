@@ -285,7 +285,7 @@ const WordGrid = () => {
               className={`word-cell ${cell.selected ? "selected" : ""}  ${cell.yellowLocked ? "yellow-locked" : ""}  ${cell.greenLocked ? "green-locked" : ""}  ${cell.blueLocked ? "blue-locked" : ""}  ${cell.purpleLocked ? "purple-locked" : ""} option`}
               onClick={() => handleWordClick(rowIndex, columnIndex)}
             >
-              <span className={!cell.word.includes(" ") && cell.word.length > 9 ? `long-word` : null}>{cell.word}</span>
+              <span>{cell.word}</span>
             </div>
           ))}
         </div>
