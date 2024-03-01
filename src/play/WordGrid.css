@@ -83,6 +83,7 @@
   border: 2px solid rgb(144, 146, 150);
   font-size: min(3.1vw, 20px);
   font-weight: 500;
+  color: black;
 }
 
 .submit-button {
@@ -95,6 +96,7 @@
   border: 2px solid rgb(144, 146, 150);
   font-size: min(3.1vw, 20px);
   font-weight: 500;
+  color: black;
 }
 
 .loss-buttons {
