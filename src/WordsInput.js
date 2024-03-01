@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import "./WordsInput.css";
-import { useStickyState, hasDuplicates, setEquals } from "./Utils";
+import {
+  useStickyState,
+  hasDuplicates,
+  setEquals,
+  randomString,
+} from "./Utils";
 import { serializeBoard, initialBoard, currentVersion } from "./Board";
 import CopyToClipboardLink from "./CopyToClipboardLink";
 import ValidationErrorList from "./ValidationErrorList";
@@ -42,8 +47,7 @@ const WordsInput = () => {
       return;
     }
     const url = `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}?name=${encodeURIComponent(puzzleName)}`;
-    const randomNum = Math.random() * 9000;
-    const token = Math.floor(1000 + randomNum);
+    const token = randomString(8);
     let body = {
       url: url,
       domain: `tinyurl.com`,
