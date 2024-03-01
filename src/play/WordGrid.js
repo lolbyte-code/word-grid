@@ -24,7 +24,7 @@ const WordGrid = () => {
   const [moves, setMoves] = useState([]);
   const [lost, setLost] = useState(false);
   const [won, setWon] = useState(false);
-  const [hideSubmit, setHideSubmit] = useState(false);
+  const [replaceSubmitWithShare, setReplaceSubmitWithShare] = useState(false);
   const [showShareMessage, setShowShareMessage] = useState(false);
   const [boardHashInvalid, setBoardHashInvalid] = useState(false);
 
@@ -195,7 +195,7 @@ const WordGrid = () => {
   };
 
   useEffect(() => {
-    if (!lost || hideSubmit) return;
+    if (!lost || replaceSubmitWithShare) return;
     setBannerText("better luck next time...");
     setBannerContent(
       <div className="loss-buttons">
@@ -220,7 +220,7 @@ const WordGrid = () => {
       setBannerText("");
     }, "1000");
     setBannerText("good job!");
-    setHideSubmit(true);
+    setReplaceSubmitWithShare(true);
   }, [won]);
 
   const handleShare = () => {
@@ -247,7 +247,7 @@ const WordGrid = () => {
     setSolvedColors(solvedColors.concat(unsolvedColors));
     setGrid([]);
     setBannerText("");
-    setHideSubmit(true);
+    setReplaceSubmitWithShare(true);
   };
 
   if (boardHashInvalid) {
@@ -300,11 +300,11 @@ const WordGrid = () => {
         <AttemptsRemaining attempts={attemptsRemaining} />
         <button
           className="submit-button"
-          onClick={() => (hideSubmit ? handleShare() : handleSubmit())}
+          onClick={() => (replaceSubmitWithShare ? handleShare() : handleSubmit())}
         >
-          {hideSubmit ? "Share" : "Submit"}
+          {replaceSubmitWithShare ? "Share" : "Submit"}
         </button>
-        {hideSubmit && showShareMessage && (
+        {replaceSubmitWithShare && showShareMessage && (
           <p className="copy-text">Copied to clipboard!</p>
         )}
       </div>
