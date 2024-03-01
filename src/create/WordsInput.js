@@ -46,7 +46,7 @@ const WordsInput = () => {
       setShowValidations(true);
       return;
     }
-    const url = `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}?name=${encodeURIComponent(puzzleName)}`;
+    const url = `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}?name=${encodeURIComponent(puzzleName.trim())}`;
     const token = randomString(8);
     let body = {
       url: url,
