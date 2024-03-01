@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
 import "./WordGrid.css";
 import { useParams, useSearchParams } from "react-router-dom";
-import { deserializeBoard, initialBoard, currentVersion } from "./Board";
+import { deserializeBoard, initialBoard, currentVersion } from "../data/Board";
 import AttemptsRemaining from "./Attempts";
 import Banner from "./Banner";
-import { setEquals, shareResultsCopyPasta } from "./Utils";
-import NotFound from "./NotFound";
+import { setEquals, shareResultsCopyPasta } from "../utils/Utils";
+import NotFound from "../common/NotFound";
 
 const WordGrid = () => {
   const [searchParams] = useSearchParams();

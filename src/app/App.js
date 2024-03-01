@@ -1,5 +1,5 @@
-import WordGrid from "./WordGrid";
-import WordsInput from "./WordsInput";
+import WordGrid from "../play/WordGrid";
+import WordsInput from "../create/WordsInput";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 

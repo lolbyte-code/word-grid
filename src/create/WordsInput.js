@@ -5,8 +5,8 @@ import {
   hasDuplicates,
   setEquals,
   randomString,
-} from "./Utils";
-import { serializeBoard, initialBoard, currentVersion } from "./Board";
+} from "../utils/Utils";
+import { serializeBoard, initialBoard, currentVersion } from "../data/Board";
 import CopyToClipboardLink from "./CopyToClipboardLink";
 import ValidationErrorList from "./ValidationErrorList";
 
