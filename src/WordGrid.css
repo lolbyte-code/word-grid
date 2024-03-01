@@ -1,3 +1,8 @@
+.word-grid-container {
+  width: 90vw;
+  max-width: 590px;
+}
+
 .word-row {
   display: flex;
 }
@@ -12,9 +17,8 @@
   border-radius: 2vw;
   text-transform: uppercase;
   user-select: none;
-  width: 20vw;
+  width: 25%;
   height: 20vw;
-  max-width: 140px;
   max-height: 140px;
   overflow: hidden;
   font-size: min(3.1vw, 19px);
@@ -22,6 +26,10 @@
   flex-direction: column;
   justify-content: center;
   overflow-wrap: break-word;
+}
+
+.answer {
+  width: auto;
 }
 
 .word-cell span {
@@ -81,15 +89,6 @@
   position: absolute;
   left: 9999px;
   opacity: 0;
-}
-
-.answer {
-  width: min(88.2vw, 98%);
-  max-width: 1000px;
-}
-
-.answer-final {
-  width: min(594px, 88.2vw);
 }
 
 .answers {

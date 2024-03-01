@@ -274,10 +274,7 @@ const WordGrid = () => {
         .map((answer) => answer.trim())
         .join(", ");
       return (
-        <div
-          key={color}
-          className={`word-cell ${color}-locked answer ${solvedColors.length === 4 ? "answer-final" : ""}`}
-        >
+        <div key={color} className={`word-cell ${color}-locked answer`}>
           <span>{board.groups[color]}</span>
           <span className="answers">{answer}</span>
         </div>
@@ -285,7 +282,7 @@ const WordGrid = () => {
     });
 
   return (
-    <div>
+    <div className="word-grid-container">
       {bannerText && (
         <Banner
           text={bannerText}
