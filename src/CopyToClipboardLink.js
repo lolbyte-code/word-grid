@@ -24,7 +24,7 @@ const CopyToClipboardLink = ({ link }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {`${link.substr(0, 30)}${link.length > 30 && "..."}`}
+        {`${link.substr(0, 30)}${link.length > 30 ? "..." : ""}`}
       </a>
       <button className="game-link-button" onClick={handleCopyToClipboard}>
         {isCopied ? "Copied!" : "Copy"}

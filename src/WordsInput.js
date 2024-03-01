@@ -168,10 +168,10 @@ const WordsInput = () => {
         </div>
         <div className="button-container">
           <button className="clear-button" onClick={() => clearBoardHandler()}>
-            Clear Board
+            Clear
           </button>
           <button className="link-button" onClick={() => generateLinkHandler()}>
-            Generate Link
+            Create
           </button>
         </div>
         {isBoardValid() && link && <CopyToClipboardLink link={link} />}

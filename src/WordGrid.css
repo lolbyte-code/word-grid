@@ -113,7 +113,7 @@
   margin: 10px;
   background-color: rgb(204, 206, 210);
   border: 2px solid rgb(144, 146, 150);
-  font-size: min(2.5vw, 20px);
+  font-size: min(3.1vw, 20px);
   font-weight: 500;
 }
 
@@ -128,7 +128,7 @@
   width: 15vh;
   background-color: rgb(204, 206, 210);
   border: 2px solid rgb(144, 146, 150);
-  font-size: min(2.5vw, 20px);
+  font-size: min(3.1vw, 20px);
   font-weight: 500;
 }
 
@@ -143,5 +143,6 @@
 }
 
 .copy-text {
-  font-size: min(2.5vw, 20px);
+  font-size: min(3.1vw, 20px);
+  font-weight: 500;
 }
