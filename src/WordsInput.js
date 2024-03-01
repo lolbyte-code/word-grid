@@ -42,9 +42,12 @@ const WordsInput = () => {
       return;
     }
     const url = `${window.location.origin}/#/play/${currentVersion}/${serializeBoard(newBoard, currentVersion)}?name=${encodeURIComponent(puzzleName)}`;
+    const randomNum = Math.random() * 9000;
+    const token = Math.floor(1000 + randomNum);
     let body = {
       url: url,
-      domain: `tiny.one`,
+      domain: `tinyurl.com`,
+      alias: `${puzzleName.replace(/[^A-Za-z]/g, "")}-${token}`,
     };
     setLink(url);
 
