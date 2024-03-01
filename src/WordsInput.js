@@ -101,7 +101,7 @@ const WordsInput = () => {
     if (!wordsLessThanMax) {
       newValidations.push("Words cannot exceed 20 characters!");
     }
-    if (!noDuplicateWords) {
+    if (wordsComplete && !noDuplicateWords) {
       newValidations.push("Duplicate words not allowed!");
     }
     if (!noDuplicateGroups) {
