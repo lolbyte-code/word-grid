@@ -64,7 +64,6 @@ const WordGrid = () => {
         row.push({
           word: words[index],
           selected: false,
-          locked: false,
           color: wordColors[index],
         });
       }
@@ -79,10 +78,6 @@ const WordGrid = () => {
   const handleWordClick = (rowIndex, columnIndex) => {
     const updatedGrid = [...grid];
     const clickedWord = updatedGrid[rowIndex][columnIndex];
-
-    if (clickedWord.locked) {
-      return;
-    }
 
     if (clickedWord.selected) {
       clickedWord.selected = false;
@@ -160,11 +155,8 @@ const WordGrid = () => {
         const updatedGrid = [...grid];
         updatedGrid.forEach((row, rowIdx) => {
           row.forEach((cell, cellIdx) => {
-            const locked = colorWords.includes(cell.word.toLowerCase());
             updatedGrid[rowIdx][cellIdx] = {
               ...cell,
-              locked: locked,
-              [`${color}Locked`]: locked,
               selected: false,
             };
           });
@@ -207,14 +199,14 @@ const WordGrid = () => {
     setBannerText("better luck next time...");
     setBannerContent(
       <div className="loss-buttons">
-        <button className="share-button" onClick={() => handleShare()}>
+        <button className="end-game-button" onClick={() => handleShare()}>
           Share
         </button>
         {showShareMessage && <p className="copy-text">Copied to clipboard!</p>}
-        <button className="share-button" onClick={() => handleTryAgain()}>
+        <button className="end-game-button" onClick={() => handleTryAgain()}>
           Try Again
         </button>
-        <button className="share-button" onClick={() => handleReveal()}>
+        <button className="end-game-button" onClick={() => handleReveal()}>
           Reveal
         </button>
       </div>,
@@ -274,7 +266,7 @@ const WordGrid = () => {
         .map((answer) => answer.trim())
         .join(", ");
       return (
-        <div key={color} className={`word-cell ${color}-locked answer`}>
+        <div key={color} className={`word-cell ${color}-answer answer-cell`}>
           <span>{board.groups[color]}</span>
           <span className="answers">{answer}</span>
         </div>
@@ -296,7 +288,7 @@ const WordGrid = () => {
           {row.map((cell, columnIndex) => (
             <div
               key={columnIndex}
-              className={`word-cell ${cell.selected ? "selected" : ""}  ${cell.yellowLocked ? "yellow-locked" : ""}  ${cell.greenLocked ? "green-locked" : ""}  ${cell.blueLocked ? "blue-locked" : ""}  ${cell.purpleLocked ? "purple-locked" : ""} option`}
+              className={`word-cell${cell.selected ? " selected" : ""}`}
               onClick={() => handleWordClick(rowIndex, columnIndex)}
             >
               <span>{cell.word}</span>
@@ -304,7 +296,7 @@ const WordGrid = () => {
           ))}
         </div>
       ))}
-      <div className="action-container">
+      <div className="submit-container">
         <AttemptsRemaining attempts={attemptsRemaining} />
         <button
           className="submit-button"

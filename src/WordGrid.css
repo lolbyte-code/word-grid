@@ -28,91 +28,56 @@
   overflow-wrap: break-word;
 }
 
-.answer {
-  width: auto;
-}
-
-.word-cell span {
-  max-height: 100%;
-  overflow-wrap: break-word;
-}
-
 .word-cell.selected {
   color: white;
   background-color: rgb(90, 89, 78);
   border: 2px solid rgb(60, 60, 53);
 }
 
-.word-cell.yellow-locked {
+.answer-cell {
+  width: auto;
+}
+
+.yellow-answer {
   color: black;
   background-color: rgb(249, 223, 109);
   border: 2px solid rgb(230, 199, 61);
 }
 
-.word-cell.green-locked {
+.green-answer {
   color: black;
   background-color: rgb(160, 195, 90);
   border: 2px solid rgb(114, 141, 61);
 }
 
-.word-cell.blue-locked {
+.blue-answer {
   color: black;
   background-color: rgb(176, 196, 239);
   border: 2px solid rgb(110, 149, 235);
 }
 
-.word-cell.purple-locked {
+.purple-answer {
   color: black;
   background-color: rgb(186, 129, 197);
   border: 2px solid rgb(154, 57, 173);
-}
-
-.word-cell.yellow-locked.option {
-  position: absolute;
-  left: 9999px;
-  opacity: 0;
-}
-
-.word-cell.green-locked.option {
-  position: absolute;
-  left: 9999px;
-  opacity: 0;
-}
-
-.word-cell.blue-locked.option {
-  position: absolute;
-  left: 9999px;
-  opacity: 0;
-}
-
-.word-cell.purple-locked.option {
-  position: absolute;
-  left: 9999px;
-  opacity: 0;
 }
 
 .answers {
   font-weight: 300;
 }
 
-.action-container {
+.submit-container {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  margin-bottom: 20px;
-  margin: auto;
   margin-top: 10px;
-  text-align: center;
-  font-family: "Poppins", sans-serif;
 }
 
-.share-button {
+.end-game-button {
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
-  color: black;
   margin: 10px;
   background-color: rgb(204, 206, 210);
   border: 2px solid rgb(144, 146, 150);
@@ -124,10 +89,8 @@
   margin: auto;
   font-family: "Poppins", sans-serif;
   padding: 10px 20px;
-  border: none;
   border-radius: 5px;
   cursor: pointer;
-  color: black;
   background-color: rgb(204, 206, 210);
   border: 2px solid rgb(144, 146, 150);
   font-size: min(3.1vw, 20px);
@@ -139,13 +102,9 @@
   flex-direction: column;
 }
 
-.win-buttons {
-  display: flex;
-  flex-direction: column;
-}
-
 .copy-text {
+  font-family: "Poppins", sans-serif;
   font-size: min(3.1vw, 20px);
   font-weight: 500;
-  margin: 0px;
+  margin: auto;
 }

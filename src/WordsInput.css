@@ -1,9 +1,7 @@
 .input-words-container {
   display: flex;
   flex-direction: row;
-  align-items: center;
   flex-wrap: wrap;
-  margin: 0 auto;
   justify-content: center;
 }
 
@@ -11,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin: 0 auto;
+  margin: auto;
   background-color: rgb(238 240 245);
   border: 2px solid rgb(90, 89, 78);
   border-radius: 5px;
@@ -70,7 +68,6 @@
   width: 100%;
   padding: 12px;
   margin-bottom: 5px;
-  border-style: none;
   box-sizing: border-box;
   font-size: 20px;
 }
@@ -82,44 +79,7 @@
 
 .puzzle-name-input {
   border-style: solid;
-  margin-bottom: 0px;
-}
-
-.clear-button,
-.link-button {
-  font-family: "Poppins", sans-serif;
-  padding: 10px 20.5px;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  color: black;
-}
-
-.game-link {
-  font-family: "Poppins", sans-serif;
-  font-size: 15px;
-  margin-right: 5px;
-  border: 2px solid rgb(144, 146, 150);
-  border-radius: 5px;
-  padding: 3px;
-}
-
-.game-link-button {
-  font-family: "Poppins", sans-serif;
-  margin-bottom: 5px;
-  background-color: rgb(204, 206, 210);
-  border: 2px solid rgb(144, 146, 150);
-  padding: 3px;
-  border-radius: 5px;
-  font-size: 15px;
-  font-weight: 500;
-}
-
-.clear-button {
-  background-color: rgb(204, 206, 210);
-  border: 2px solid rgb(144, 146, 150);
-  font-size: 20px;
-  font-weight: 500;
+  margin-bottom: 0;
 }
 
 .button-container {
@@ -128,9 +88,22 @@
   margin-bottom: 10px;
 }
 
+.clear-button,
+.link-button {
+  font-family: "Poppins", sans-serif;
+  padding: 10px 20.5px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.clear-button {
+  background-color: rgb(204, 206, 210);
+  border: 2px solid rgb(144, 146, 150);
+}
+
 .link-button {
   background-color: rgb(232, 167, 83);
   border: 2px solid rgb(195 127 39);
-  font-size: 20px;
-  font-weight: 500;
 }

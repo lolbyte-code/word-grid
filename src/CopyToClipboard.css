@@ -1,0 +1,19 @@
+.copy-link {
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  margin-right: 5px;
+  border: 2px solid rgb(144, 146, 150);
+  border-radius: 5px;
+  padding: 3px;
+}
+
+.copy-link-button {
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 5px;
+  background-color: rgb(204, 206, 210);
+  border: 2px solid rgb(144, 146, 150);
+  padding: 3px;
+  border-radius: 5px;
+  font-size: 15px;
+  font-weight: 500;
+}

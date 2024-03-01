@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import copy from "clipboard-copy";
+import "./CopyToClipboard.css";
 
 const CopyToClipboardLink = ({ link }) => {
   const [isCopied, setIsCopied] = useState(false);
@@ -19,14 +20,14 @@ const CopyToClipboardLink = ({ link }) => {
   return (
     <div>
       <a
-        className="game-link"
+        className="copy-link"
         href={link}
         target="_blank"
         rel="noopener noreferrer"
       >
         {`${link.substr(0, 26)}${link.length > 26 ? "..." : ""}`}
       </a>
-      <button className="game-link-button" onClick={handleCopyToClipboard}>
+      <button className="copy-link-button" onClick={handleCopyToClipboard}>
         {isCopied ? "Copied!" : "Copy"}
       </button>
     </div>
