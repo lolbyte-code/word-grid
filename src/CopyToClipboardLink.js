@@ -10,7 +10,7 @@ const CopyToClipboardLink = ({ link }) => {
       setIsCopied(true);
       setTimeout(() => {
         setIsCopied(false);
-      }, 2000); // Reset "Copied" status after 2 seconds
+      }, 2000);
     } catch (error) {
       console.error("Error copying to clipboard:", error);
     }
@@ -24,7 +24,7 @@ const CopyToClipboardLink = ({ link }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {`${link.substr(0, 30)}${link.length > 30 ? "..." : ""}`}
+        {`${link.substr(0, 26)}${link.length > 26 ? "..." : ""}`}
       </a>
       <button className="game-link-button" onClick={handleCopyToClipboard}>
         {isCopied ? "Copied!" : "Copy"}
