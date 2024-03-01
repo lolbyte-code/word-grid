@@ -12,7 +12,7 @@ class BoardWords {
   }
 }
 
-export function initialBoard() {
+export const initialBoard = () => {
   const groups = {
     yellow: "",
     green: "",
@@ -30,9 +30,9 @@ export function initialBoard() {
   }
 
   return new Board(groups, words);
-}
+};
 
-export function serializeBoard(board, version) {
+export const serializeBoard = (board, version) => {
   return btoa(
     encodeURIComponent(
       `${Object.values(board.groups).join("|")}|${board.words
@@ -43,9 +43,9 @@ export function serializeBoard(board, version) {
         .join("|")}`,
     ),
   );
-}
+};
 
-export function deserializeBoard(boardHash, version) {
+export const deserializeBoard = (boardHash, version) => {
   const list = decodeURIComponent(atob(boardHash)).split("|");
   const board = initialBoard();
   board.groups.yellow = list[0].trim();
@@ -111,6 +111,6 @@ export function deserializeBoard(boardHash, version) {
   board.words[3][3].group = colorMap.get(list[35]);
 
   return board;
-}
+};
 
 export const currentVersion = "v1";

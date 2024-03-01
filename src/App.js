@@ -3,7 +3,7 @@ import WordsInput from "./WordsInput";
 import { Routes, Route } from "react-router-dom";
 import "./App.css";
 
-function App() {
+const App = () => {
   return (
     <Routes>
       <Route path="play/v1">
@@ -12,6 +12,6 @@ function App() {
       <Route path="*" element={<WordsInput />}></Route>
     </Routes>
   );
-}
+};
 
 export default App;
