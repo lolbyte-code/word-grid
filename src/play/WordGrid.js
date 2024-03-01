@@ -23,7 +23,7 @@ const WordGrid = () => {
   const [solvedColors, setSolvedColors] = useState([]);
   const [moves, setMoves] = useState([]);
   const [lost, setLost] = useState(false);
-  const [win, setWin] = useState(false);
+  const [won, setWon] = useState(false);
   const [hideSubmit, setHideSubmit] = useState(false);
   const [showShareMessage, setShowShareMessage] = useState(false);
   const [boardHashInvalid, setBoardHashInvalid] = useState(false);
@@ -189,7 +189,7 @@ const WordGrid = () => {
       }
     } else {
       if (Array.from(targetWords).every((color) => color[1].length === 0)) {
-        setWin(true);
+        setWon(true);
       }
     }
   };
@@ -215,13 +215,13 @@ const WordGrid = () => {
   }, [lost, showShareMessage]);
 
   useEffect(() => {
-    if (!win) return;
+    if (!won) return;
     setTimeout(() => {
       setBannerText("");
     }, "1000");
     setBannerText("good job!");
     setHideSubmit(true);
-  }, [win]);
+  }, [won]);
 
   const handleShare = () => {
     navigator.clipboard.writeText(
