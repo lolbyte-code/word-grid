@@ -18,6 +18,7 @@ const WordGrid = () => {
   const [attemptsRemaining, setAttemptsRemaining] = useState(4);
   const [bannerText, setBannerText] = useState("");
   const [bannerContent, setBannerContent] = useState(null);
+  const [allowBannerInteraction, setAllowBannerInteraction] = useState(false);
   const [guesses, setGuesses] = useState([]);
   const [solvedColors, setSolvedColors] = useState([]);
   const [moves, setMoves] = useState([]);
@@ -116,8 +117,10 @@ const WordGrid = () => {
     if (guesses.some((guess) => setEquals(guess, selectedWordsSet))) {
       setTimeout(() => {
         setBannerText("");
+        setAllowBannerInteraction(false);
       }, "1000");
       setBannerText("already guessed!");
+      setAllowBannerInteraction(true);
       return;
     } else {
       const newGuesses = [...guesses];
@@ -135,8 +138,10 @@ const WordGrid = () => {
       if (oneAway) {
         setTimeout(() => {
           if (attemptsRemaining > 1) setBannerText("");
+          setAllowBannerInteraction(false);
         }, "1000");
         setBannerText("one away...");
+        setAllowBannerInteraction(true);
       }
     });
 
@@ -286,7 +291,11 @@ const WordGrid = () => {
   return (
     <div>
       {bannerText && (
-        <Banner text={bannerText} content={bannerContent}></Banner>
+        <Banner
+          text={bannerText}
+          content={bannerContent}
+          allowInteraction={allowBannerInteraction}
+        ></Banner>
       )}
       {SolvedTiles}
       {grid.map((row, rowIndex) => (
