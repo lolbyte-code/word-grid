@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./WordGrid.css";
 import { useParams, useSearchParams } from "react-router-dom";
-import { deserializeBoard, initialBoard, currentVersion } from "../data/Board";
+import { deserializeBoard, initialBoard } from "../data/Board";
 import AttemptsRemaining from "./Attempts";
 import Banner from "./Banner";
 import { setEquals, shareResultsCopyPasta } from "../utils/Utils";
@@ -31,8 +31,13 @@ const WordGrid = () => {
   useEffect(() => {
     let newBoard;
     try {
-      newBoard = deserializeBoard(boardHash, currentVersion);
+      newBoard = deserializeBoard(
+        boardHash,
+        // v1 was a path param, not a query param
+        searchParams.get("version") || "v1",
+      );
     } catch (error) {
+      console.error(`Failed to load board: ${error}`);
       setBoardHashInvalid(true);
       return;
     }

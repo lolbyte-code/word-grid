@@ -40,6 +40,17 @@ export const initialBoard = () => {
 };
 
 export const serializeBoard = (board, version) => {
+  switch (version) {
+    case "v1":
+      return serializeBoardV1(board);
+    case "v2":
+      return serializeBoardV2(board);
+    default:
+      throw new Error("No version provided");
+  }
+};
+
+const serializeBoardV1 = (board) => {
   return btoa(
     encodeURIComponent(
       `${Object.values(board.groups).join("|")}|${board.words
@@ -52,7 +63,32 @@ export const serializeBoard = (board, version) => {
   );
 };
 
+const sortOrderString = "ABCDEFGHIJKLMNOP";
+const nonBase64Delimiter = "-";
+
+const serializeBoardV2 = (board) => {
+  const sortOrder = [...sortOrderString]
+    .sort(() => Math.random() - 0.5)
+    .join("");
+  return `${Object.values(board.groups)
+    .map((group) => btoa(encodeURIComponent(group)))
+    .join(nonBase64Delimiter)}${nonBase64Delimiter}${board.words
+    .flatMap((b) => b.map((c) => btoa(encodeURIComponent(c.text))))
+    .join(nonBase64Delimiter)}${sortOrder}`;
+};
+
 export const deserializeBoard = (boardHash, version) => {
+  switch (version) {
+    case "v1":
+      return deserializeBoardV1(boardHash);
+    case "v2":
+      return deserializeBoardV2(boardHash);
+    default:
+      throw new Error("No version provided");
+  }
+};
+
+export const deserializeBoardV1 = (boardHash) => {
   const colors = ["yellow", "green", "blue", "purple"];
   const list = decodeURIComponent(atob(boardHash)).split("|");
   const board = initialBoard();
@@ -83,4 +119,45 @@ export const deserializeBoard = (boardHash, version) => {
   return board;
 };
 
-export const currentVersion = "v1";
+export const deserializeBoardV2 = (boardHash) => {
+  const colors = ["yellow", "green", "blue", "purple"];
+  const board = initialBoard();
+  const list = boardHash
+    .slice(0, -16)
+    .split(nonBase64Delimiter)
+    .map((element) => decodeURIComponent(atob(element)));
+  const groupList = list.slice(0, 4);
+  const wordsList = list.slice(4);
+  const order = [...boardHash.slice(-16)].map((letter) =>
+    sortOrderString.indexOf(letter),
+  );
+
+  board.groups.yellow = groupList[0].trim();
+  board.groups.green = groupList[1].trim();
+  board.groups.blue = groupList[2].trim();
+  board.groups.purple = groupList[3].trim();
+
+  const colorMap = new Map();
+  let wordIndex = 0;
+  colors.forEach((color) => {
+    const words = wordsList.slice(wordIndex, wordIndex + 4);
+    board.answers[color] = words.map((word) => {
+      colorMap.set(word, color);
+      return word;
+    });
+    wordIndex += 4;
+  });
+
+  colors.forEach((_, rowIdx) => {
+    colors.forEach((_, colIdx) => {
+      const wordIndex = 4 * rowIdx + colIdx;
+      const actualIndex = order[wordIndex];
+      board.words[rowIdx][colIdx].text = wordsList[actualIndex].trim();
+      board.words[rowIdx][colIdx].group = colorMap.get(wordsList[actualIndex]);
+    });
+  });
+
+  return board;
+};
+
+export const currentVersion = "v2";

@@ -9,6 +9,9 @@ const App = () => {
       <Route path="play/v1">
         <Route path=":boardHash" element={<WordGrid />}></Route>
       </Route>
+      <Route path="play/">
+        <Route path=":boardHash" element={<WordGrid />}></Route>
+      </Route>
       <Route path="*" element={<WordsInput />}></Route>
     </Routes>
   );
