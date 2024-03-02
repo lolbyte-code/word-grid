@@ -9,8 +9,11 @@ import {
 import { serializeBoard, initialBoard, currentVersion } from "../data/Board";
 import CopyToClipboardLink from "./CopyToClipboardLink";
 import ValidationErrorList from "./ValidationErrorList";
+import { useSearchParams } from "react-router-dom";
 
 const WordsInput = () => {
+  const [searchParams] = useSearchParams();
+  const version = searchParams.get("versionOverride") || currentVersion;
   const board = initialBoard();
   const [newBoard, setNewBoard] = useStickyState({ ...board }, "board");
   const [puzzleName, setPuzzleName] = useStickyState("", "puzzleName");
@@ -48,7 +51,7 @@ const WordsInput = () => {
     }
     let url = ``;
     try {
-      url = `${window.location.origin}/#/play/${serializeBoard(newBoard, currentVersion)}?version=${currentVersion}&name=${encodeURIComponent(puzzleName.trim())}`;
+      url = `${window.location.origin}/#/play/${serializeBoard(newBoard, version)}?version=${version}&name=${encodeURIComponent(puzzleName.trim())}`;
     } catch (error) {
       console.error(error);
     }
