@@ -46,7 +46,12 @@ const WordsInput = () => {
       setShowValidations(true);
       return;
     }
-    const url = `${window.location.origin}/#/play/${serializeBoard(newBoard, currentVersion)}?version=${currentVersion}&name=${encodeURIComponent(puzzleName.trim())}`;
+    let url = ``;
+    try {
+      url = `${window.location.origin}/#/play/${serializeBoard(newBoard, currentVersion)}?version=${currentVersion}&name=${encodeURIComponent(puzzleName.trim())}`;
+    } catch (error) {
+      console.error(error);
+    }
     const token = randomString(8);
     let body = {
       url: url,

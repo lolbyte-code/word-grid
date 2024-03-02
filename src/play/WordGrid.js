@@ -37,7 +37,7 @@ const WordGrid = () => {
         searchParams.get("version") || "v1",
       );
     } catch (error) {
-      console.error(`Failed to load board: ${error}`);
+      console.error(error);
       setBoardHashInvalid(true);
       return;
     }
