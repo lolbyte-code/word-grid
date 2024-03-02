@@ -74,4 +74,4 @@ export const deserializeBoard = (boardHash, version) => {
   }
 };
 
-export const currentVersion = "v2";
+export const currentVersion = "v3";

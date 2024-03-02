@@ -145,7 +145,19 @@ export const deserializeBoardV3 = (boardHash, board) => {
 };
 
 const base64UrlEncode = (input) => {
-  let base64 = btoa(input);
+  let notAllowedCharacters = /[^A-Za-z0-9!@#$^&*()[\]{};:'"`~]/g;
+  let base64;
+  try {
+    base64 = btoa(input);
+  } catch {
+    try {
+      // Apostrophes are encoded weirdly on mobile.
+      base64 = btoa(input.replace("”", '"').replace("’", "'"));
+    } catch {
+      // Some really weird character got in.
+      base64 = btoa(input.replace(notAllowedCharacters, ""));
+    }
+  }
   let base64Url = base64
     .replace(/\+/g, "-")
     .replace(/\//g, "_")
