@@ -1,5 +1,5 @@
 .word-grid-container {
-  width: 90vw;
+  width: 98vw;
   max-width: 590px;
 }
 
@@ -18,10 +18,10 @@
   text-transform: uppercase;
   user-select: none;
   width: 25%;
-  height: 20vw;
+  height: 22vw;
   max-height: 140px;
   overflow: hidden;
-  font-size: min(3.1vw, 19px);
+  font-size: min(3.6vw, 20px);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -81,7 +81,7 @@
   margin: 10px;
   background-color: rgb(204, 206, 210);
   border: 2px solid rgb(144, 146, 150);
-  font-size: min(3.1vw, 20px);
+  font-size: 20px;
   font-weight: 500;
   color: black;
 }
@@ -94,7 +94,7 @@
   cursor: pointer;
   background-color: rgb(204, 206, 210);
   border: 2px solid rgb(144, 146, 150);
-  font-size: min(3.1vw, 20px);
+  font-size: 20px;
   font-weight: 500;
   color: black;
 }
@@ -106,7 +106,7 @@
 
 .copy-text {
   font-family: "Poppins", sans-serif;
-  font-size: min(3.1vw, 20px);
+  font-size: 20px;
   font-weight: 500;
   margin: auto;
 }

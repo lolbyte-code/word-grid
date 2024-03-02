@@ -80,6 +80,9 @@ const WordsInput = () => {
   };
 
   const isBoardValid = () => {
+    const groupNameLimit = 30;
+    const wordLimit = 15;
+    const puzzleNameLimit = 20;
     const keysComplete =
       newBoard.groups.yellow &&
       newBoard.groups.blue &&
@@ -89,7 +92,10 @@ const WordsInput = () => {
       row.map((word) => word.text),
     );
     const wordsComplete = allWords.every((word) => word !== "");
-    const wordsLessThanMax = allWords.every((word) => word.length <= 20);
+    const groupsLessThanMax = Object.entries(newBoard.groups).every(
+      (group) => group[1].length <= groupNameLimit,
+    );
+    const wordsLessThanMax = allWords.every((word) => word.length <= wordLimit);
     const noDuplicateWords = !hasDuplicates(allWords);
     const noDuplicateGroups = !hasDuplicates([
       newBoard.groups.yellow,
@@ -98,6 +104,7 @@ const WordsInput = () => {
       newBoard.groups.purple,
     ]);
     const puzzleNameExists = puzzleName !== "";
+    const puzzleNameLessThanMax = puzzleName.length <= puzzleNameLimit;
     const newValidations = [];
     if (!keysComplete) {
       newValidations.push("All groups must be named!");
@@ -106,7 +113,12 @@ const WordsInput = () => {
       newValidations.push("Words may not be blank!");
     }
     if (!wordsLessThanMax) {
-      newValidations.push("Words cannot exceed 20 characters!");
+      newValidations.push(`Words cannot exceed ${wordLimit} characters!`);
+    }
+    if (!groupsLessThanMax) {
+      newValidations.push(
+        `Group names cannot exceed ${groupNameLimit} characters!`,
+      );
     }
     if (wordsComplete && !noDuplicateWords) {
       newValidations.push("Duplicate words not allowed!");
@@ -117,6 +129,11 @@ const WordsInput = () => {
     if (!puzzleNameExists) {
       newValidations.push("Puzzle name required!");
     }
+    if (!puzzleNameLessThanMax) {
+      newValidations.push(
+        `Puzzle name cannot exceed ${puzzleNameLimit} characters!`,
+      );
+    }
     if (!setEquals(new Set(newValidations), new Set(validations))) {
       setValidations(newValidations);
     }
@@ -124,9 +141,11 @@ const WordsInput = () => {
       keysComplete &&
       wordsComplete &&
       wordsLessThanMax &&
+      groupsLessThanMax &&
       noDuplicateWords &&
       noDuplicateGroups &&
-      puzzleNameExists
+      puzzleNameExists &&
+      puzzleNameLessThanMax
     );
   };
 
