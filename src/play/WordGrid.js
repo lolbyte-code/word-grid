@@ -76,6 +76,7 @@ const WordGrid = () => {
   }, [boardHash]);
 
   const handleWordClick = (rowIndex, columnIndex) => {
+    if (lost) return;
     const updatedGrid = [...grid];
     const clickedWord = updatedGrid[rowIndex][columnIndex];
 
@@ -94,6 +95,7 @@ const WordGrid = () => {
   };
 
   const handleSubmit = () => {
+    if (lost) return;
     const selectedCount = grid.flat().filter((cell) => cell.selected).length;
     if (selectedCount !== 4) {
       return;
@@ -300,7 +302,9 @@ const WordGrid = () => {
         <AttemptsRemaining attempts={attemptsRemaining} />
         <button
           className="submit-button"
-          onClick={() => (replaceSubmitWithShare ? handleShare() : handleSubmit())}
+          onClick={() =>
+            replaceSubmitWithShare ? handleShare() : handleSubmit()
+          }
         >
           {replaceSubmitWithShare ? "Share" : "Submit"}
         </button>
