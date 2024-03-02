@@ -71,9 +71,9 @@ const serializeBoardV2 = (board) => {
     .sort(() => Math.random() - 0.5)
     .join("");
   return `${Object.values(board.groups)
-    .map((group) => btoa(encodeURIComponent(group)))
+    .map((group) => encodeURIComponent(btoa(group)))
     .join(nonBase64Delimiter)}${nonBase64Delimiter}${board.words
-    .flatMap((b) => b.map((c) => btoa(encodeURIComponent(c.text))))
+    .flatMap((b) => b.map((c) => encodeURIComponent(btoa(c.text))))
     .join(nonBase64Delimiter)}${sortOrder}`;
 };
 
@@ -125,7 +125,7 @@ export const deserializeBoardV2 = (boardHash) => {
   const list = boardHash
     .slice(0, -16)
     .split(nonBase64Delimiter)
-    .map((element) => decodeURIComponent(atob(element)));
+    .map((element) => atob(decodeURIComponent(element)));
   const groupList = list.slice(0, 4);
   const wordsList = list.slice(4);
   const order = [...boardHash.slice(-16)].map((letter) =>
