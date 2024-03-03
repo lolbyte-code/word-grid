@@ -10,7 +10,7 @@ Inspired by [NYT Connections](https://www.nytimes.com/games/connections). Play a
 
 ### Play Board
 
-<img width="600" alt="Screenshot 2024-03-03 at 2 08 14 PM" src="https://github.com/lolbyte-code/word-grid/assets/5995446/54865274-1602-4042-b709-02ee42a6e166">
+<img width="600" alt="Screenshot 2024-03-03 at 2 11 54 PM" src="https://github.com/lolbyte-code/word-grid/assets/5995446/758a3109-3c21-4cbe-bc44-7405c5905e7e">
 
 ## Dev Reference
 
