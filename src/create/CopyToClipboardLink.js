@@ -25,7 +25,7 @@ const CopyToClipboardLink = ({ link }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        {`${link.substr(0, 26)}${link.length > 26 ? "..." : ""}`}
+        {`${link.substr(0, 24)}${link.length > 24 ? "..." : ""}`}
       </a>
       <button className="copy-link-button" onClick={handleCopyToClipboard}>
         {isCopied ? "Copied!" : "Copy"}
