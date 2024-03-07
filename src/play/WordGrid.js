@@ -231,13 +231,21 @@ const WordGrid = () => {
   }, [won]);
 
   const handleShare = () => {
-    navigator.clipboard.writeText(
-      shareResultsCopyPasta(moves, searchParams.get("name")),
-    );
-    setTimeout(() => {
-      setShowShareMessage(false);
-    }, "1000");
-    setShowShareMessage(true);
+    const copyPasta = shareResultsCopyPasta(moves, searchParams.get("name"));
+    if (navigator.share) {
+      navigator
+        .share({
+          title: searchParams.get("name"),
+          text: copyPasta,
+        })
+        .catch((error) => console.error(error));
+    } else {
+      navigator.clipboard.writeText(copyPasta);
+      setTimeout(() => {
+        setShowShareMessage(false);
+      }, "1000");
+      setShowShareMessage(true);
+    }
   };
 
   const handleTryAgain = () => {
