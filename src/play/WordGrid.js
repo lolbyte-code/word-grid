@@ -27,6 +27,8 @@ const WordGrid = () => {
   const [hidePlayButtons, setHidePlayButtons] = useState(false);
   const [showShareMessage, setShowShareMessage] = useState(false);
   const [boardHashInvalid, setBoardHashInvalid] = useState(false);
+  const [submitDisabled, setSubmitDisabled] = useState(false);
+  const [deselectDisabled, setDeselectDisabled] = useState(false);
 
   useEffect(() => {
     let newBoard;
@@ -293,6 +295,21 @@ const WordGrid = () => {
     setGrid(result);
   };
 
+  useEffect(() => {
+    if (!grid) return;
+    const selectedCount = grid.flat().filter((cell) => cell.selected).length;
+    if (selectedCount < 4) {
+      setSubmitDisabled(true);
+    } else {
+      setSubmitDisabled(false);
+    }
+    if (selectedCount === 0) {
+      setDeselectDisabled(true);
+    } else {
+      setDeselectDisabled(false);
+    }
+  }, [grid]);
+
   if (boardHashInvalid) {
     return <NotFound />;
   }
@@ -343,20 +360,23 @@ const WordGrid = () => {
         <AttemptsRemaining attempts={attemptsRemaining} />
         <div className="play-buttons-container">
           {!hidePlayButtons && !lost && (
+            <button className="shuffle-button" onClick={() => handleShuffle()}>
+              Shuffle
+            </button>
+          )}
+          {!hidePlayButtons && !lost && (
             <button
-              className="deselect-button"
+              className={`deselect-button${deselectDisabled ? " disabled" : ""}`}
               onClick={() => handleDeselect()}
             >
               Clear
             </button>
           )}
           {!hidePlayButtons && !lost && (
-            <button className="shuffle-button" onClick={() => handleShuffle()}>
-              Shuffle
-            </button>
-          )}
-          {!hidePlayButtons && !lost && (
-            <button className="submit-button" onClick={() => handleSubmit()}>
+            <button
+              className={`submit-button${submitDisabled ? " disabled" : ""}`}
+              onClick={() => handleSubmit()}
+            >
               Submit
             </button>
           )}

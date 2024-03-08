@@ -111,6 +111,14 @@
   border: 2px solid rgb(195 127 39);
 }
 
+.submit-button.disabled {
+  color: rgb(195 127 39);
+}
+
+.deselect-button.disabled {
+  color: rgb(144, 146, 150);
+}
+
 .loss-buttons {
   display: flex;
   flex-direction: column;

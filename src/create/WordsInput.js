@@ -206,7 +206,7 @@ const WordsInput = () => {
             ))}
             <ChangeColorCircles
               source={color}
-              targets={groupColors.filter((c) => c != color)}
+              targets={groupColors.filter((c) => c !== color)}
               clickHandler={changeColorHandler}
             />
           </div>
