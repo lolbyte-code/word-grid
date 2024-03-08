@@ -1,0 +1,32 @@
+.change-color-circles-container {
+  display: flex;
+  margin: auto;
+  margin-top: 3px;
+}
+
+.change-color-circle {
+  width: 2vh;
+  height: 2vh;
+  border-radius: 50%;
+  margin: 2.5px;
+}
+
+.change-color-circle.yellow {
+  border: 2px solid rgb(230, 199, 61);
+  background-color: rgb(249, 223, 109);
+}
+
+.change-color-circle.green {
+  border: 2px solid rgb(114, 141, 61);
+  background-color: rgb(160, 195, 90);
+}
+
+.change-color-circle.blue {
+  border: 2px solid rgb(110, 149, 235);
+  background-color: rgb(176, 196, 239);
+}
+
+.change-color-circle.purple {
+  border: 2px solid rgb(154, 57, 173);
+  background-color: rgb(186, 129, 197);
+}

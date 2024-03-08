@@ -10,6 +10,7 @@ import { serializeBoard, initialBoard, currentVersion } from "../data/Board";
 import CopyToClipboardLink from "./CopyToClipboardLink";
 import ValidationErrorList from "./ValidationErrorList";
 import { useSearchParams } from "react-router-dom";
+import ChangeColorCircles from "./ChangeColorCircles";
 
 const WordsInput = () => {
   const [searchParams] = useSearchParams();
@@ -157,6 +158,24 @@ const WordsInput = () => {
     );
   };
 
+  const changeColorHandler = (source, target) => {
+    const sourceIdx = groupColors.indexOf(source);
+    const targetIdx = groupColors.indexOf(target);
+    const updatedBoard = { ...newBoard };
+
+    let swap = updatedBoard.groups[source];
+    updatedBoard.groups[source] = updatedBoard.groups[target];
+    updatedBoard.groups[target] = swap;
+
+    for (let i = 0; i < groupColors.length; i++) {
+      swap = updatedBoard.words[sourceIdx][i];
+      updatedBoard.words[sourceIdx][i] = updatedBoard.words[targetIdx][i];
+      updatedBoard.words[targetIdx][i] = swap;
+    }
+
+    setNewBoard(updatedBoard);
+  };
+
   const groupColors = Object.entries(newBoard.groups).map((group) => group[0]);
 
   return (
@@ -185,6 +204,11 @@ const WordsInput = () => {
                 className="word-input"
               />
             ))}
+            <ChangeColorCircles
+              source={color}
+              targets={groupColors.filter((c) => c != color)}
+              clickHandler={changeColorHandler}
+            />
           </div>
         ))}
       </div>
