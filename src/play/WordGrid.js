@@ -24,7 +24,7 @@ const WordGrid = () => {
   const [moves, setMoves] = useState([]);
   const [lost, setLost] = useState(false);
   const [won, setWon] = useState(false);
-  const [replaceSubmitWithShare, setReplaceSubmitWithShare] = useState(false);
+  const [hidePlayButtons, setHidePlayButtons] = useState(false);
   const [showShareMessage, setShowShareMessage] = useState(false);
   const [boardHashInvalid, setBoardHashInvalid] = useState(false);
 
@@ -100,7 +100,6 @@ const WordGrid = () => {
   };
 
   const handleSubmit = () => {
-    if (lost) return;
     const selectedCount = grid.flat().filter((cell) => cell.selected).length;
     if (selectedCount !== 4) {
       return;
@@ -202,7 +201,7 @@ const WordGrid = () => {
   };
 
   useEffect(() => {
-    if (!lost || replaceSubmitWithShare) return;
+    if (!lost || hidePlayButtons) return;
     setBannerText("better luck next time...");
     setBannerContent(
       <div className="loss-buttons">
@@ -227,7 +226,7 @@ const WordGrid = () => {
       setBannerText("");
     }, "1000");
     setBannerText("good job!");
-    setReplaceSubmitWithShare(true);
+    setHidePlayButtons(true);
   }, [won]);
 
   const handleShare = () => {
@@ -262,7 +261,36 @@ const WordGrid = () => {
     setSolvedColors(solvedColors.concat(unsolvedColors));
     setGrid([]);
     setBannerText("");
-    setReplaceSubmitWithShare(true);
+    setHidePlayButtons(true);
+  };
+
+  const handleShuffle = () => {
+    const sortedGridFlattened = grid.flat().sort(() => Math.random() - 0.5);
+    const result = [];
+    for (let i = 0; i < 4; i++) {
+      const row = [];
+      for (let j = 0; j < 4; j++) {
+        if (sortedGridFlattened[i * 4 + j]) {
+          row.push(sortedGridFlattened[i * 4 + j]);
+        }
+      }
+      result.push(row);
+    }
+    setGrid(result);
+  };
+
+  const handleDeselect = () => {
+    const result = [];
+    for (let i = 0; i < 4; i++) {
+      const row = grid[i];
+      for (let j = 0; j < 4; j++) {
+        if (row[j]) {
+          row[j].selected = false;
+        }
+      }
+      result.push(row);
+    }
+    setGrid(result);
   };
 
   if (boardHashInvalid) {
@@ -311,17 +339,34 @@ const WordGrid = () => {
           ))}
         </div>
       ))}
-      <div className="submit-container">
+      <div className="play-container">
         <AttemptsRemaining attempts={attemptsRemaining} />
-        <button
-          className="submit-button"
-          onClick={() =>
-            replaceSubmitWithShare ? handleShare() : handleSubmit()
-          }
-        >
-          {replaceSubmitWithShare ? "Share" : "Submit"}
-        </button>
-        {replaceSubmitWithShare && showShareMessage && (
+        <div className="play-buttons-container">
+          {!hidePlayButtons && !lost && (
+            <button
+              className="deselect-button"
+              onClick={() => handleDeselect()}
+            >
+              Clear
+            </button>
+          )}
+          {!hidePlayButtons && !lost && (
+            <button className="shuffle-button" onClick={() => handleShuffle()}>
+              Shuffle
+            </button>
+          )}
+          {!hidePlayButtons && !lost && (
+            <button className="submit-button" onClick={() => handleSubmit()}>
+              Submit
+            </button>
+          )}
+          {hidePlayButtons && (
+            <button className="share-button" onClick={() => handleShare()}>
+              Share
+            </button>
+          )}
+        </div>
+        {hidePlayButtons && showShareMessage && (
           <p className="copy-text">Copied to clipboard!</p>
         )}
       </div>
