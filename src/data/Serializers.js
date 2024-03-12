@@ -1,5 +1,6 @@
 const sortOrderString = "ABCDEFGHIJKLMNOP";
 const nonBase64Delimiter = "-";
+const dashReplacement = "{DASH}";
 
 export const serializeBoardV1 = (board) => {
   return btoa(
@@ -29,9 +30,13 @@ export const serializeBoardV3 = (board) => {
   const sortOrder = [...sortOrderString]
     .sort(() => Math.random() - 0.5)
     .join("");
-  const groups = Object.values(board.groups).join(nonBase64Delimiter);
+  const groups = Object.values(board.groups)
+    .map((c) => c.replace(nonBase64Delimiter, dashReplacement))
+    .join(nonBase64Delimiter);
   const words = board.words
-    .flatMap((b) => b.map((c) => c.text))
+    .flatMap((b) =>
+      b.map((c) => c.text.replace(nonBase64Delimiter, dashReplacement)),
+    )
     .join(nonBase64Delimiter);
   return base64UrlEncode(`${groups}${nonBase64Delimiter}${words}${sortOrder}`);
 };
@@ -109,7 +114,10 @@ export const deserializeBoardV2 = (boardHash, board) => {
 export const deserializeBoardV3 = (boardHash, board) => {
   const colors = ["yellow", "green", "blue", "purple"];
   const decoded = base64UrlDecode(boardHash);
-  const list = decoded.slice(0, -16).split(nonBase64Delimiter);
+  const list = decoded
+    .slice(0, -16)
+    .split(nonBase64Delimiter)
+    .map((w) => w.replace(dashReplacement, nonBase64Delimiter));
   const groupList = list.slice(0, 4);
   const wordsList = list.slice(4);
   const order = [...decoded.slice(-16)].map((letter) =>
