@@ -7,8 +7,8 @@
   width: 2vh;
   height: 2vh;
   border-radius: 50%;
-  background-color: rgb(90, 89, 78);
-  border: 2px solid rgb(64, 64, 56);
+  background-color: var(--dark-grey-color);
+  border: 2px solid var(--dark-grey-outline);
   margin-right: 2.5px;
   margin-left: 2.5px;
 }

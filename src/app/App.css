@@ -3,3 +3,21 @@ body {
   justify-content: center;
   margin-top: 20px;
 }
+
+:root {
+  --purple-outline: rgb(154, 57, 173);
+  --purple-color: rgb(186, 129, 197);
+  --blue-outline: rgb(110, 149, 235);
+  --blue-color: rgb(176, 196, 239);
+  --green-outline: rgb(114, 141, 61);
+  --green-color: rgb(160, 195, 90);
+  --yellow-outline: rgb(230, 199, 61);
+  --yellow-color: rgb(249, 223, 109);
+  --orange-outline: rgb(195 127 39);
+  --orange-color: rgb(232, 167, 83);
+  --grey-outline: rgb(144, 146, 150);
+  --grey-color: rgb(204, 206, 210);
+  --dark-grey-outline: rgb(64, 64, 56);
+  --dark-grey-color: rgb(90, 89, 78);
+  --light-grey-color: rgb(238 240 245);
+}

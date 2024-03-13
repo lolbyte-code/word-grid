@@ -30,8 +30,8 @@
 
 .word-cell.selected {
   color: white;
-  background-color: rgb(90, 89, 78);
-  border: 2px solid rgb(60, 60, 53);
+  background-color: var(--dark-grey-color);
+  border: 2px solid var(--dark-grey-outline);
 }
 
 .answer-cell {
@@ -40,26 +40,26 @@
 
 .yellow-answer {
   color: black;
-  background-color: rgb(249, 223, 109);
-  border: 2px solid rgb(230, 199, 61);
+  background-color: var(--yellow-color);
+  border: 2px solid var(--yellow-outline);
 }
 
 .green-answer {
   color: black;
-  background-color: rgb(160, 195, 90);
-  border: 2px solid rgb(114, 141, 61);
+  background-color: var(--green-color);
+  border: 2px solid var(--green-outline);
 }
 
 .blue-answer {
   color: black;
-  background-color: rgb(176, 196, 239);
-  border: 2px solid rgb(110, 149, 235);
+  background-color: var(--blue-color);
+  border: 2px solid var(--blue-outline);
 }
 
 .purple-answer {
   color: black;
-  background-color: rgb(186, 129, 197);
-  border: 2px solid rgb(154, 57, 173);
+  background-color: var(--purple-color);
+  border: 2px solid var(--purple-outline);
 }
 
 .answers {
@@ -83,8 +83,8 @@
   border-radius: 5px;
   cursor: pointer;
   margin: 10px;
-  background-color: rgb(204, 206, 210);
-  border: 2px solid rgb(144, 146, 150);
+  background-color: var(--grey-color);
+  border: 2px solid var(--grey-outline);
   font-size: 18px;
   font-weight: 500;
   color: black;
@@ -98,8 +98,8 @@
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
-  background-color: rgb(204, 206, 210);
-  border: 2px solid rgb(144, 146, 150);
+  background-color: var(--grey-color);
+  border: 2px solid var(--grey-outline);
   font-size: min(3.6vw, 20px);
   font-weight: 500;
   color: black;
@@ -107,16 +107,16 @@
 }
 
 .submit-button {
-  background-color: rgb(232, 167, 83);
-  border: 2px solid rgb(195 127 39);
+  background-color: var(--orange-color);
+  border: 2px solid var(--orange-outline);
 }
 
 .submit-button.disabled {
-  color: rgb(195 127 39);
+  color: var(--orange-outline);
 }
 
 .deselect-button.disabled {
-  color: rgb(144, 146, 150);
+  color: var(--grey-outline);
 }
 
 .loss-buttons {

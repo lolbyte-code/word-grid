@@ -12,21 +12,21 @@
 }
 
 .change-color-circle.yellow {
-  border: 2px solid rgb(230, 199, 61);
-  background-color: rgb(249, 223, 109);
+  border: 2px solid var(--yellow-outline);
+  background-color: var(--yellow-color);
 }
 
 .change-color-circle.green {
-  border: 2px solid rgb(114, 141, 61);
-  background-color: rgb(160, 195, 90);
+  border: 2px solid var(--green-outline);
+  background-color: var(--green-color);
 }
 
 .change-color-circle.blue {
-  border: 2px solid rgb(110, 149, 235);
-  background-color: rgb(176, 196, 239);
+  border: 2px solid var(--blue-outline);
+  background-color: var(--blue-color);
 }
 
 .change-color-circle.purple {
-  border: 2px solid rgb(154, 57, 173);
-  background-color: rgb(186, 129, 197);
+  border: 2px solid var(--purple-outline);
+  background-color: var(--purple-color);
 }
