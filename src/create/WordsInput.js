@@ -114,6 +114,7 @@ const WordsInput = () => {
     ]);
     const puzzleNameExists = puzzleName !== "";
     const puzzleNameLessThanMax = puzzleName.length <= puzzleNameLimit;
+    const puzzleNameStartsWithLetter = puzzleName.length > 0 && puzzleName[0].match(/[A-z]/)
     const newValidations = [];
     if (!keysComplete) {
       newValidations.push("All groups must be named!");
@@ -143,6 +144,9 @@ const WordsInput = () => {
         `Puzzle name cannot exceed ${puzzleNameLimit} characters!`,
       );
     }
+    if (puzzleNameExists && !puzzleNameStartsWithLetter) {
+      newValidations.push("Puzzle name must start with a letter!")
+    }
     if (!setEquals(new Set(newValidations), new Set(validations))) {
       setValidations(newValidations);
     }
@@ -154,7 +158,8 @@ const WordsInput = () => {
       noDuplicateWords &&
       noDuplicateGroups &&
       puzzleNameExists &&
-      puzzleNameLessThanMax
+      puzzleNameLessThanMax &&
+      puzzleNameStartsWithLetter
     );
   };
 
