@@ -114,7 +114,8 @@ const WordsInput = () => {
     ]);
     const puzzleNameExists = puzzleName !== "";
     const puzzleNameLessThanMax = puzzleName.length <= puzzleNameLimit;
-    const puzzleNameStartsWithLetter = puzzleName.length > 0 && puzzleName[0].match(/[A-z]/)
+    const puzzleNameStartsWithLetter =
+      puzzleName.length > 0 && puzzleName[0].match(/[A-z]/);
     const newValidations = [];
     if (!keysComplete) {
       newValidations.push("All groups must be named!");
@@ -145,7 +146,7 @@ const WordsInput = () => {
       );
     }
     if (puzzleNameExists && !puzzleNameStartsWithLetter) {
-      newValidations.push("Puzzle name must start with a letter!")
+      newValidations.push("Puzzle name must start with a letter!");
     }
     if (!setEquals(new Set(newValidations), new Set(validations))) {
       setValidations(newValidations);
@@ -226,7 +227,6 @@ const WordsInput = () => {
             value={puzzleName}
             onChange={(event) => setPuzzleName(event.target.value)}
             className="word-input puzzle-name-input"
-            disabled={!isBoardValid() && validations.length > 1}
           />
         </div>
         <div className="button-container">
