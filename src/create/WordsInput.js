@@ -92,7 +92,7 @@ const WordsInput = () => {
     const groupNameLimit = 30;
     const wordLimit = 15;
     const puzzleNameLimit = 20;
-    const keysComplete =
+    const groupsComplete =
       newBoard.groups.yellow &&
       newBoard.groups.blue &&
       newBoard.groups.purple &&
@@ -117,7 +117,7 @@ const WordsInput = () => {
     const puzzleNameStartsWithLetter =
       puzzleName.length > 0 && puzzleName[0].match(/[A-z]/);
     const newValidations = [];
-    if (!keysComplete) {
+    if (!groupsComplete) {
       newValidations.push("All groups must be named!");
     }
     if (!wordsComplete) {
@@ -134,7 +134,7 @@ const WordsInput = () => {
     if (wordsComplete && !noDuplicateWords) {
       newValidations.push("Duplicate words not allowed!");
     }
-    if (!noDuplicateGroups) {
+    if (groupsComplete && !noDuplicateGroups) {
       newValidations.push("Duplicate group names not allowed!");
     }
     if (!puzzleNameExists) {
@@ -152,7 +152,7 @@ const WordsInput = () => {
       setValidations(newValidations);
     }
     return (
-      keysComplete &&
+      groupsComplete &&
       wordsComplete &&
       wordsLessThanMax &&
       groupsLessThanMax &&
