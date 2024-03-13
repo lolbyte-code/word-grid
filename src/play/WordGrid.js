@@ -1,15 +1,12 @@
 import React, { useState, useEffect } from "react";
 import "./WordGrid.css";
-import { useParams, useSearchParams } from "react-router-dom";
 import { deserializeBoard, initialBoard } from "../data/Board";
 import AttemptsRemaining from "./Attempts";
 import Banner from "./Banner";
 import { setEquals, shareResultsCopyPasta } from "../utils/Utils";
 import NotFound from "../common/NotFound";
 
-const WordGrid = () => {
-  const [searchParams] = useSearchParams();
-  const { boardHash } = useParams();
+const WordGrid = ({ boardHash, puzzleName, version }) => {
   const [board, setBoard] = useState(initialBoard());
   const colors = Object.entries(board.groups).map((group) => group[0]);
 
@@ -33,11 +30,7 @@ const WordGrid = () => {
   useEffect(() => {
     let newBoard;
     try {
-      newBoard = deserializeBoard(
-        boardHash,
-        // v1 was a path param, not a query param
-        searchParams.get("version") || "v1",
-      );
+      newBoard = deserializeBoard(boardHash, version);
     } catch (error) {
       console.error(error);
       setBoardHashInvalid(true);
@@ -232,11 +225,11 @@ const WordGrid = () => {
   }, [won]);
 
   const handleShare = () => {
-    const copyPasta = shareResultsCopyPasta(moves, searchParams.get("name"));
+    const copyPasta = shareResultsCopyPasta(moves, puzzleName);
     if (navigator.share) {
       navigator
         .share({
-          title: searchParams.get("name"),
+          title: puzzleName,
           text: copyPasta,
         })
         .catch((error) => console.error(error));

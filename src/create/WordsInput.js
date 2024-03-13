@@ -12,7 +12,7 @@ import ValidationErrorList from "./ValidationErrorList";
 import { useSearchParams } from "react-router-dom";
 import ChangeColorCircles from "./ChangeColorCircles";
 
-const WordsInput = () => {
+const WordsInput = ({ useTinyUrl }) => {
   const [searchParams] = useSearchParams();
   const version = searchParams.get("versionOverride") || currentVersion;
   const board = initialBoard();
@@ -52,18 +52,22 @@ const WordsInput = () => {
     }
     let url = ``;
     try {
-      url = `${window.location.origin}/#/play/${serializeBoard(newBoard, version)}?version=${version}&name=${encodeURIComponent(puzzleName.trim())}`;
+      url = `${window.location.origin}/#/?boardHash=${serializeBoard(newBoard, version)}&version=${version}&name=${encodeURIComponent(puzzleName.trim())}`;
     } catch (error) {
       console.error(error);
     }
+    setLink(url);
+
+    if (!useTinyUrl) {
+      return;
+    }
+
     const token = randomString(8);
     let body = {
       url: url,
       domain: `tinyurl.com`,
       alias: `${puzzleName.replace(/[^A-Za-z]/g, "")}-${token}`,
     };
-    setLink(url);
-
     fetch(`https://api.tinyurl.com/create`, {
       method: `POST`,
       headers: {
