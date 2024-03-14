@@ -19,5 +19,10 @@ body {
   --grey-color: rgb(204, 206, 210);
   --dark-grey-outline: rgb(64, 64, 56);
   --dark-grey-color: rgb(90, 89, 78);
+  --light-grey-outline: #cecccc;
   --light-grey-color: rgb(238 240 245);
+  --not-found-title-color: #d9534f;
+  --validation-error-text-color: #721c24;
+  --error-box-outline: #e74c3c;
+  --error-box-color: #f8d7da;
 }
