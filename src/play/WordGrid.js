@@ -5,6 +5,7 @@ import AttemptsRemaining from "./Attempts";
 import Banner from "./Banner";
 import { setEquals, shareResultsCopyPasta } from "../utils/Utils";
 import NotFound from "../common/NotFound";
+import copy from "clipboard-copy";
 
 const WordGrid = ({ boardHash, puzzleName, version }) => {
   const [board, setBoard] = useState(initialBoard());
@@ -224,7 +225,7 @@ const WordGrid = ({ boardHash, puzzleName, version }) => {
     setHidePlayButtons(true);
   }, [won]);
 
-  const handleShare = () => {
+  const handleShare = async () => {
     const copyPasta = shareResultsCopyPasta(moves, puzzleName);
     if (navigator.share) {
       navigator
@@ -234,11 +235,15 @@ const WordGrid = ({ boardHash, puzzleName, version }) => {
         })
         .catch((error) => console.error(error));
     } else {
-      navigator.clipboard.writeText(copyPasta);
-      setTimeout(() => {
-        setShowShareMessage(false);
-      }, "1000");
-      setShowShareMessage(true);
+      try {
+        await copy(copyPasta);
+        setTimeout(() => {
+          setShowShareMessage(false);
+        }, "1000");
+        setShowShareMessage(true);
+      } catch (error) {
+        console.error("Error copying to clipboard:", error);
+      }
     }
   };
 
