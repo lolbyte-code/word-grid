@@ -196,7 +196,7 @@ const WordsInput = ({ useTinyUrl }) => {
             <label>
               <input
                 type="text"
-                placeholder={`${color.charAt(0).toUpperCase() + color.slice(1)} Group Title`}
+                placeholder={`"${color.charAt(0).toUpperCase() + color.slice(1)}" Group Title`}
                 value={newBoard.groups[color]}
                 onChange={(event) => handleGroupChange(color, event)}
                 className="word-input"
