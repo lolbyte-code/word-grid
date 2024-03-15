@@ -7,7 +7,7 @@ import { setEquals, shareResultsCopyPasta } from "../utils/Utils";
 import NotFound from "../common/NotFound";
 import copy from "clipboard-copy";
 
-const WordGrid = ({ boardHash, puzzleName, version }) => {
+const WordGrid = ({ boardHash, puzzleName, version, createLink }) => {
   const [board, setBoard] = useState(initialBoard());
   const colors = Object.entries(board.groups).map((group) => group[0]);
 
@@ -381,6 +381,18 @@ const WordGrid = ({ boardHash, puzzleName, version }) => {
           {hidePlayButtons && (
             <button className="share-button" onClick={() => handleShare()}>
               Share
+            </button>
+          )}
+          {(won || lost) && (
+            <button className="create-your-own-button">
+              <a
+                className="hide-link"
+                rel="noreferrer"
+                target="_blank"
+                href={createLink}
+              >
+                Create Your Own!
+              </a>
             </button>
           )}
         </div>

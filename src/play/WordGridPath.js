@@ -5,7 +5,12 @@ const WordGridPath = ({ puzzleName, version }) => {
   const { boardHash } = useParams();
 
   return (
-    <WordGrid boardHash={boardHash} version={version} puzzleName={puzzleName} />
+    <WordGrid
+      boardHash={boardHash}
+      version={version}
+      puzzleName={puzzleName}
+      createLink="https://tonys-toy-box.com/"
+    />
   );
 };
 

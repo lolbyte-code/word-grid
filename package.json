@@ -1,5 +1,5 @@
 {
-  "name": "connections-maker",
+  "name": "tonys-connections",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -19,9 +19,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build && cp CNAME build/",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "predeploy": "npm run build",
+    "format": "./node_modules/.bin/prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,scss,md}\"",
     "deploy": "gh-pages -d build"
   },
   "homepage": "https://tonys-toy-box.com",

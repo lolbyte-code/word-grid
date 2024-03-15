@@ -9,6 +9,7 @@
   height: 2vh;
   border-radius: 50%;
   margin: 2.5px;
+  cursor: pointer;
 }
 
 .change-color-circle.yellow {

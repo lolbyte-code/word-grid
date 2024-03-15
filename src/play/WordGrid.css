@@ -90,6 +90,7 @@
   color: black;
 }
 
+.create-your-own-button,
 .deselect-button,
 .share-button,
 .shuffle-button,
@@ -107,6 +108,11 @@
 }
 
 .submit-button {
+  background-color: var(--orange-color);
+  border: 2px solid var(--orange-outline);
+}
+
+.create-your-own-button {
   background-color: var(--orange-color);
   border: 2px solid var(--orange-outline);
 }

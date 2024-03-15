@@ -12,7 +12,7 @@ import ValidationErrorList from "./ValidationErrorList";
 import { useSearchParams } from "react-router-dom";
 import ChangeColorCircles from "./ChangeColorCircles";
 
-const WordsInput = ({ useTinyUrl }) => {
+const WordsInput = ({ linkBaseUrl }) => {
   const [searchParams] = useSearchParams();
   const version = searchParams.get("versionOverride") || currentVersion;
   const board = initialBoard();
@@ -52,15 +52,11 @@ const WordsInput = ({ useTinyUrl }) => {
     }
     let url = ``;
     try {
-      url = `${window.location.origin}/#/?boardHash=${serializeBoard(newBoard, version)}&version=${version}&name=${encodeURIComponent(puzzleName.trim())}`;
+      url = `${linkBaseUrl}#/?boardHash=${serializeBoard(newBoard, version)}&version=${version}&name=${encodeURIComponent(puzzleName.trim())}`;
     } catch (error) {
       console.error(error);
     }
     setLink(url);
-
-    if (!useTinyUrl) {
-      return;
-    }
 
     const token = randomString(8);
     let body = {
@@ -181,6 +177,8 @@ const WordsInput = ({ useTinyUrl }) => {
       swap = updatedBoard.words[sourceIdx][i];
       updatedBoard.words[sourceIdx][i] = updatedBoard.words[targetIdx][i];
       updatedBoard.words[targetIdx][i] = swap;
+      updatedBoard.words[sourceIdx][i].group = source;
+      updatedBoard.words[targetIdx][i].group = target;
     }
 
     setNewBoard(updatedBoard);
@@ -196,7 +194,7 @@ const WordsInput = ({ useTinyUrl }) => {
             <label>
               <input
                 type="text"
-                placeholder={`"${color.charAt(0).toUpperCase() + color.slice(1)}" Group Title`}
+                placeholder={`${color.charAt(0).toUpperCase() + color.slice(1)} Group Title`}
                 value={newBoard.groups[color]}
                 onChange={(event) => handleGroupChange(color, event)}
                 className="word-input"

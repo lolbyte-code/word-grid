@@ -26,3 +26,8 @@ body {
   --error-box-outline: #e74c3c;
   --error-box-color: #f8d7da;
 }
+
+.hide-link {
+  text-decoration: none;
+  color: black;
+}

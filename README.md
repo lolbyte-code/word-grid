@@ -1,4 +1,4 @@
-# Word Grid
+# Tony's Connections
 
 Inspired by [NYT Connections](https://www.nytimes.com/games/connections). Play at [https://tonys-toy-box.com/](https://tonys-toy-box.com/)
 
@@ -35,5 +35,5 @@ npm run deploy
 ### Prettify the code:
 
 ```bash
-./node_modules/.bin/prettier --write "src/**/*.{js,jsx,ts,tsx,json,css,scss,md}"
+npm run format
 ```

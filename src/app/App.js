@@ -33,9 +33,10 @@ const App = () => {
               boardHash={boardHash}
               version={version}
               puzzleName={puzzleName}
+              createLink="https://tonys-toy-box.com/"
             />
           ) : (
-            <WordsInput useTinyUrl={true} />
+            <WordsInput linkBaseUrl={`${window.location.origin}/`} />
           )
         }
       ></Route>
