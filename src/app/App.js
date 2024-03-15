@@ -10,6 +10,7 @@ const App = () => {
   // v1 was a path param, not a query param
   const version = searchParams.get("version") || "v1";
   const puzzleName = searchParams.get("name");
+  const showTitle = searchParams.get("showTitle") === "true" || false;
 
   return (
     <Routes>
@@ -34,6 +35,7 @@ const App = () => {
               version={version}
               puzzleName={puzzleName}
               createLink="https://tonys-toy-box.com/"
+              showTitle={!!showTitle}
             />
           ) : (
             <WordsInput linkBaseUrl={`${window.location.origin}/`} />

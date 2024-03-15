@@ -136,3 +136,8 @@
   font-weight: 500;
   margin: auto;
 }
+
+.puzzleNameHeader {
+  font-family: "Poppins", sans-serif;
+  text-align: center;
+}

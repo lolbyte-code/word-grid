@@ -10,6 +10,7 @@ const WordGridPath = ({ puzzleName, version }) => {
       version={version}
       puzzleName={puzzleName}
       createLink="https://tonys-toy-box.com/"
+      showTitle={false}
     />
   );
 };

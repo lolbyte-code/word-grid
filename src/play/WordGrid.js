@@ -7,7 +7,13 @@ import { setEquals, shareResultsCopyPasta } from "../utils/Utils";
 import NotFound from "../common/NotFound";
 import copy from "clipboard-copy";
 
-const WordGrid = ({ boardHash, puzzleName, version, createLink }) => {
+const WordGrid = ({
+  boardHash,
+  puzzleName,
+  version,
+  createLink,
+  showTitle,
+}) => {
   const [board, setBoard] = useState(initialBoard());
   const colors = Object.entries(board.groups).map((group) => group[0]);
 
@@ -333,6 +339,7 @@ const WordGrid = ({ boardHash, puzzleName, version, createLink }) => {
 
   return (
     <div className="word-grid-container">
+      {showTitle && <h2 className="puzzleNameHeader">{puzzleName}</h2>}
       {bannerText && (
         <Banner
           text={bannerText}
