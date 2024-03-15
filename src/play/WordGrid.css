@@ -14,7 +14,7 @@
   margin: 3.7px;
   background-color: var(--light-grey-color);
   border: 2px solid var(--light-grey-outline);
-  border-radius: 2vw;
+  border-radius: 10px;
   text-transform: uppercase;
   user-select: none;
   width: 25%;
