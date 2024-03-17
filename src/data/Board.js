@@ -1,6 +1,4 @@
 import {
-  serializeBoardV1,
-  serializeBoardV2,
   serializeBoardV3,
   deserializeBoardV1,
   deserializeBoardV2,
@@ -50,10 +48,6 @@ export const initialBoard = () => {
 
 export const serializeBoard = (board, version) => {
   switch (version) {
-    case "v1":
-      return serializeBoardV1(board);
-    case "v2":
-      return serializeBoardV2(board);
     case "v3":
       return serializeBoardV3(board);
     default:

@@ -2,30 +2,6 @@ const sortOrderString = "ABCDEFGHIJKLMNOP";
 const nonBase64Delimiter = "-";
 const dashReplacement = "{DASH}";
 
-export const serializeBoardV1 = (board) => {
-  return btoa(
-    encodeURIComponent(
-      `${Object.values(board.groups).join("|")}|${board.words
-        .flatMap((b) => b.map((c) => c.text))
-        .join("|")}|${board.words
-        .flatMap((b) => b.map((c) => c.text))
-        .sort(() => Math.random() - 0.5)
-        .join("|")}`,
-    ),
-  );
-};
-
-export const serializeBoardV2 = (board) => {
-  const sortOrder = [...sortOrderString]
-    .sort(() => Math.random() - 0.5)
-    .join("");
-  return `${Object.values(board.groups)
-    .map((group) => btoa(encodeURIComponent(group)))
-    .join(nonBase64Delimiter)}${nonBase64Delimiter}${board.words
-    .flatMap((b) => b.map((c) => btoa(encodeURIComponent(c.text))))
-    .join(nonBase64Delimiter)}${sortOrder}`;
-};
-
 export const serializeBoardV3 = (board) => {
   const sortOrder = [...sortOrderString]
     .sort(() => Math.random() - 0.5)
