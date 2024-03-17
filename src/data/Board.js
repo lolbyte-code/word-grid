@@ -51,7 +51,7 @@ export const serializeBoard = (board, version) => {
     case "v3":
       return serializeBoardV3(board);
     default:
-      throw new Error("No version provided");
+      throw new Error("Invalid version!");
   }
 };
 
@@ -64,7 +64,7 @@ export const deserializeBoard = (boardHash, version) => {
     case "v3":
       return deserializeBoardV3(boardHash, initialBoard());
     default:
-      throw new Error("No version provided");
+      throw new Error("Invalid version!");
   }
 };
 
