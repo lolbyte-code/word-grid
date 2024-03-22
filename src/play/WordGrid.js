@@ -220,7 +220,7 @@ const WordGrid = ({
       </div>,
     );
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lost, showShareMessage]);
+  }, [lost, showShareMessage, bannerText]);
 
   useEffect(() => {
     if (!won) return;
