@@ -7,9 +7,9 @@
   display: flex;
 }
 
-.word-cell {
+.word-cell, .answer-cell {
   font-weight: 600;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--mono-font);
   text-align: center;
   margin: 3.7px;
   background-color: var(--light-grey-color);
@@ -35,6 +35,7 @@
 }
 
 .answer-cell {
+  font-family: var(--font);
   width: auto;
 }
 
@@ -78,7 +79,7 @@
 }
 
 .end-game-button {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -95,7 +96,7 @@
 .share-button,
 .shuffle-button,
 .submit-button {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
   padding: 10px 20px;
   border-radius: 5px;
   cursor: pointer;
@@ -131,13 +132,13 @@
 }
 
 .copy-text {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
   font-size: min(3.6vw, 20px);
   font-weight: 500;
   margin: auto;
 }
 
 .puzzleNameHeader {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
   text-align: center;
 }

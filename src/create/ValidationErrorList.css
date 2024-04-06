@@ -1,6 +1,6 @@
 .validation-error-list {
   width: 81%;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
   font-size: 20px;
   margin-top: 5px;
   padding: 10px;

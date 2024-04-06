@@ -330,12 +330,39 @@ const WordGrid = ({
         .map((answer) => answer.trim())
         .join(", ");
       return (
-        <div key={color} className={`word-cell ${color}-answer answer-cell`}>
+        <div key={color} className={`${color}-answer answer-cell`}>
           <span>{board.groups[color]}</span>
           <span className="answers">{answer}</span>
         </div>
       );
     });
+
+  const getFontSize = (length) => {
+    switch (length) {
+      case 1:
+      case 2:
+      case 3:
+      case 4:
+      case 5:
+      case 6:
+      case 7:
+      case 8:
+      case 9:
+        return "min(3.6vw, 20px)";
+      case 10:
+        return "min(3.3vw, 19px)";
+      case 11:
+        return "min(3.0vw, 18px)";
+      case 12:
+        return "min(2.7vw, 17px)";
+      case 13:
+        return "min(2.5vw, 16px)";
+      case 14:
+        return "min(2.3vw, 15px)";
+      default:
+        return "min(2.2vw, 14px)";
+    }
+  };
 
   return (
     <div className="word-grid-container">
@@ -356,7 +383,9 @@ const WordGrid = ({
               className={`word-cell${cell.selected ? " selected" : ""}`}
               onClick={() => handleWordClick(rowIndex, columnIndex)}
             >
-              <span>{cell.word}</span>
+              <span style={{ fontSize: getFontSize(cell.word.length) }}>
+                {cell.word}
+              </span>
             </div>
           ))}
         </div>

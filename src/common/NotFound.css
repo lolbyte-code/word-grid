@@ -7,11 +7,11 @@
 .not-found-title {
   font-size: 2em;
   color: var(--not-found-title-color);
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
 }
 
 .not-found-text {
   font-size: 1.2em;
   color: var(--dark-grey-color);
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
 }

@@ -25,6 +25,8 @@ body {
   --validation-error-text-color: #721c24;
   --error-box-outline: #e74c3c;
   --error-box-color: #f8d7da;
+  --font: "Poppins", sans-serif;
+  --mono-font: "Roboto Mono", monospace;
 }
 
 .hide-link {

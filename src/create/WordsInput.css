@@ -64,7 +64,7 @@
 
 .word-input {
   border-radius: 5px;
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
   width: 100%;
   padding: 12px;
   margin-bottom: 5px;
@@ -90,7 +90,7 @@
 
 .clear-button,
 .link-button {
-  font-family: "Poppins", sans-serif;
+  font-family: var(--font);
   padding: 10px 20.5px;
   border-radius: 5px;
   cursor: pointer;
