@@ -6,7 +6,6 @@ import Banner from "./Banner";
 import { setEquals, shareResultsCopyPasta } from "../utils/Utils";
 import NotFound from "../common/NotFound";
 import copy from "clipboard-copy";
-import WordCell from "./WordCell";
 
 const WordGrid = ({
   boardHash,
@@ -331,7 +330,7 @@ const WordGrid = ({
         .map((answer) => answer.trim())
         .join(", ");
       return (
-        <div key={color} className={`${color}-answer answer-cell`}>
+        <div key={color} className={`word-cell ${color}-answer answer-cell`}>
           <span>{board.groups[color]}</span>
           <span className="answers">{answer}</span>
         </div>
@@ -352,12 +351,13 @@ const WordGrid = ({
       {grid.map((row, rowIndex) => (
         <div key={rowIndex} className="word-row">
           {row.map((cell, columnIndex) => (
-            <WordCell
+            <div
               key={columnIndex}
-              selected={cell.selected}
+              className={`word-cell${cell.selected ? " selected" : ""}`}
               onClick={() => handleWordClick(rowIndex, columnIndex)}
-              word={cell.word}
-            />
+            >
+              <span>{cell.word}</span>
+            </div>
           ))}
         </div>
       ))}
